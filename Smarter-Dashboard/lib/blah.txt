@@ -1,0 +1,4 @@
+hello
+
+github doesnt have a new folder option
+so i created this instead
