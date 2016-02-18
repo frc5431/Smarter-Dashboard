@@ -18,12 +18,7 @@ public class TurretShower {
 		final JLabel intake = new JLabel();
 		intake.setBounds(200, 200, 500, 500);
 		f.add(intake);
-		final JProgressBar intakespeed = new JProgressBar();
-		intakespeed.setStringPainted(true);
-		intakespeed.setToolTipText("Intake Speed");
-		intakespeed.setBounds(200, 700, 500, 25);
-		intakespeed.setVisible(true);
-		f.add(intakespeed);
+
 		
 		final JLabel turret = new JLabel();
 		turret.setBounds(800, 200, 500, 500);
@@ -54,7 +49,6 @@ public class TurretShower {
 			}
 			private void action(){
 				final boolean isIntaking = SmarterDashboard.table.getBoolean("intake",false);
-				final double intakeSpeed = SmarterDashboard.table.getNumber("current intake speed",0.0);
 				if(isIntaking){
 					intake.setIcon(new ImageIcon(SmarterDashboard.getImage("res"+File.separator+"intake on.png")));
 					intake.setForeground(Color.GREEN);
@@ -63,7 +57,6 @@ public class TurretShower {
 					intake.setIcon(new ImageIcon(SmarterDashboard.getImage("res"+File.separator+"intake off.png")));
 					intake.setForeground(Color.RED);
 				}
-				intakespeed.setValue((int)(intakeSpeed*100.0));
 				
 				final boolean isTurreting = SmarterDashboard.table.getBoolean("turret",false);
 				final double turretSpeed = SmarterDashboard.table.getNumber("current turret speed",0.0);
