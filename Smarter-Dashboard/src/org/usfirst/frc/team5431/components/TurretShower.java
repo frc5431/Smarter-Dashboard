@@ -15,22 +15,24 @@ import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class TurretShower {
 	public TurretShower(JFrame f,Executor exe){
-		JLabel intake = new JLabel("Creating threads...");
+		final JLabel intake = new JLabel();
 		intake.setBounds(200, 200, 500, 500);
 		f.add(intake);
-		JProgressBar intakespeed = new JProgressBar();
+		final JProgressBar intakespeed = new JProgressBar();
 		intakespeed.setStringPainted(true);
 		intakespeed.setToolTipText("Intake Speed");
 		intakespeed.setBounds(200, 700, 500, 25);
+		intakespeed.setVisible(true);
 		f.add(intakespeed);
 		
-		JLabel turret = new JLabel();
+		final JLabel turret = new JLabel();
 		turret.setBounds(800, 200, 500, 500);
 		f.add(turret);
-		JProgressBar turretspeed = new JProgressBar();
+		final JProgressBar turretspeed = new JProgressBar();
 		turretspeed.setStringPainted(true);
 		turretspeed.setToolTipText("Intake Speed");
 		turretspeed.setBounds(800, 700, 500, 25);
+		turretspeed.setVisible(true);
 		f.add(turretspeed);
 		final Thread colorthread = new Thread(){
 			final double tps = 10d;//ticks per second
