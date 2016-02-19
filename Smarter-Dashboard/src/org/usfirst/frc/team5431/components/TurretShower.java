@@ -48,13 +48,13 @@ public class TurretShower {
 		f.add(rightwheel);
 
 		final JSpinner turretmax = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.05));
-		turretmax.setBounds(0, 921, 1000, 50);
+		turretmax.setBounds(0, 150, 1000, 50);
 		turretmax.setVisible(true);
 		turretmax.setToolTipText("Turret Max");
 		f.add(turretmax);
 
 		final JSpinner intakemax = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.05));
-		intakemax.setBounds(0, 150, 1000, 50);
+		intakemax.setBounds(0, 921, 1000, 50);
 		intakemax.setVisible(true);
 		intakemax.setToolTipText("Intake Max");
 		f.add(intakemax);
@@ -63,7 +63,7 @@ public class TurretShower {
 		boulder.setBounds(0, 380, 1000, 361);
 		boulder.setOpaque(true);
 		boulder.setVisible(true);
-		boulder.setIcon(new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "ball.png")));
+		boulder.setIcon(new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "intake off.png")));
 		f.add(boulder);
 		
 		f.repaint();
@@ -91,6 +91,7 @@ public class TurretShower {
 							turretspeed.setValue((int) SmarterDashboard.table.getNumber("current turret speed", 0.0));
 							turretmax.setValue(SmarterDashboard.table.getNumber("turret max", 0.7));
 							intakemax.setValue(SmarterDashboard.table.getNumber("intake max", 0.7));
+							init=true;
 						}
 						action();
 						delta--;
@@ -104,11 +105,9 @@ public class TurretShower {
 					if (isIntaking) {
 						intake.setIcon(
 								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "intake on.png")));
-						intake.setForeground(Color.GREEN);
 					} else {
 						intake.setIcon(
 								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "intake off.png")));
-						intake.setForeground(Color.RED);
 					}
 
 					final boolean isTurreting = SmarterDashboard.table.getBoolean("turret", false);
