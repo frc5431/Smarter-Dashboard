@@ -9,69 +9,105 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class TurretShower {
-	public TurretShower(JFrame f,Executor exe){
+	public TurretShower(JFrame f, Executor exe) {
 		final JLabel intake = new JLabel();
-		intake.setBounds(200, 200, 500, 500);
+		intake.setBounds(0, 560, 1000, 361);
 		f.add(intake);
 
-		
 		final JLabel turret = new JLabel();
-		turret.setBounds(800, 200, 500, 500);
+		turret.setBounds(0, 200, 1000, 360);
 		f.add(turret);
-		final JProgressBar turretspeed = new JProgressBar();
+		final JProgressBar turretspeed = new JProgressBar(SwingConstants.VERTICAL, 0, 100);
 		turretspeed.setStringPainted(true);
-		turretspeed.setToolTipText("Intake Speed");
-		turretspeed.setBounds(800, 700, 500, 25);
+		turretspeed.setToolTipText("Turret Speed");
+		turretspeed.setBounds(1000, 200, 100, 360);
+		turretspeed.setValue(50);
 		turretspeed.setVisible(true);
 		f.add(turretspeed);
-		final Thread colorthread = new Thread(){
-			final double tps = 10d;//ticks per second
+
+		final JSpinner turretmax = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.05));
+		turretmax.setBounds(0, 0, 150, 50);
+		turretmax.setVisible(true);
+		turretmax.setToolTipText("Turret Max");
+		f.add(turretmax);
+
+		final JSpinner intakemax = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.05));
+		intakemax.setBounds(150, 0, 150, 50);
+		intakemax.setVisible(true);
+		intakemax.setToolTipText("Intake Max");
+		f.add(intakemax);
+
+		final Thread colorthread = new Thread() {
+			final double tps = 10d;// ticks per second
+
 			@Override
 			public void run() {
+				// set the values inside the input boxes to the correct one.
+				// otherwise, it will raise errors
+				boolean init = false;
 				long lastTime = System.nanoTime();
-				double ns = 1000000000/tps;//10 times per second
-				//checks immediately for connection
+				double ns = 1000000000 / tps;// 10 times per second
+				// checks immediately for connection
 				double delta = 1;
 				while (true) {
 					long now = System.nanoTime();
 					delta += (now - lastTime) / ns;
 					lastTime = now;
 					if (delta >= 1) {
+						if (!init) {
+							//turretmax.setValue(SmarterDashboard.table.getNumber("turret max"));
+							//intakemax.setValue(SmarterDashboard.table.getNumber("intake max"));
+							init=true;
+						}
 						action();
 						delta--;
 					}
 				}
 			}
-			private void action(){
-				final boolean isIntaking = SmarterDashboard.table.getBoolean("intake",false);
-				if(isIntaking){
-					intake.setIcon(new ImageIcon(SmarterDashboard.getImage("res"+File.separator+"intake on.png")));
-					intake.setForeground(Color.GREEN);
+
+			private void action() {
+				try {
+					final boolean isIntaking = SmarterDashboard.table.getBoolean("intake", false);
+					if (isIntaking) {
+						intake.setIcon(
+								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "intake on.png")));
+						intake.setForeground(Color.GREEN);
+					} else {
+						intake.setIcon(
+								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "intake off.png")));
+						intake.setForeground(Color.RED);
+					}
+
+					final boolean isTurreting = SmarterDashboard.table.getBoolean("turret", false);
+					final double turretSpeed = SmarterDashboard.table.getNumber("current turret speed", 0.0);
+					if (isTurreting) {
+						turret.setIcon(
+								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "turret on.png")));
+						turret.setForeground(Color.GREEN);
+					} else {
+						turret.setIcon(
+								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "turret off.png")));
+						turret.setForeground(Color.RED);
+					}
+					turretspeed.setValue((int) (turretSpeed * 100.0));
+
+					SmarterDashboard.table.putNumber("turret max", (double) turretmax.getValue());
+					SmarterDashboard.table.putNumber("intake max", (double) intakemax.getValue());
+				} catch (Throwable t) {
+					t.printStackTrace();
 				}
-				else{
-					intake.setIcon(new ImageIcon(SmarterDashboard.getImage("res"+File.separator+"intake off.png")));
-					intake.setForeground(Color.RED);
-				}
-				
-				final boolean isTurreting = SmarterDashboard.table.getBoolean("turret",false);
-				final double turretSpeed = SmarterDashboard.table.getNumber("current turret speed",0.0);
-				if(isTurreting){
-					turret.setIcon(new ImageIcon(SmarterDashboard.getImage("res"+File.separator+"turret on.png")));
-					turret.setForeground(Color.GREEN);
-				}
-				else{
-					turret.setIcon(new ImageIcon(SmarterDashboard.getImage("res"+File.separator+"turret off.png")));
-					turret.setForeground(Color.RED);
-				}
-				turretspeed.setValue((int)(turretSpeed*100.0));
 			}
 		};
 		exe.execute(colorthread);
 	}
-	
+
 }

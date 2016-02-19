@@ -30,9 +30,6 @@ public class SmarterDashboard {
 	public static boolean recievedMessage = false;
 	private static final Executor exe = Executors.newCachedThreadPool();
 	
-	
-	public static volatile boolean Connection = false;
-
 	public static void main(String[] args) {
 				
 		final JFrame shooting = new JFrame("Vision - Smarter Dashboard");
@@ -43,8 +40,16 @@ public class SmarterDashboard {
 		shooting.setLayout(null);
 		shooting.setVisible(true);
 		
-		final JFrame settings = new JFrame("Turret - Smarter Dashboard");
-		settings.setSize(2160, 1080);
+		final JFrame turret = new JFrame("Turret - Smarter Dashboard");
+		turret.setSize(2160, 1080);
+		turret.setIconImage(getImage("res" + File.separator + "logo.png"));
+		turret.setResizable(false);
+		turret.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		turret.setLayout(null);
+		turret.setVisible(true);
+		
+		final JFrame settings = new JFrame("Control Panel - Smarter Dashboard");
+		settings.setSize(200, 600);
 		settings.setIconImage(getImage("res" + File.separator + "logo.png"));
 		settings.setResizable(false);
 		settings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,10 +58,9 @@ public class SmarterDashboard {
 		
 		final JLabel connection = new JLabel("Connecting...", SwingConstants.CENTER);
 		connection.setBackground(Color.YELLOW);
-		connection.setBounds(0, 0, 2160, 50);
+		connection.setBounds(0, 0, 200, 50);
 		connection.setOpaque(true);
 		settings.add(connection);
-		shooting.add(connection);
 
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");
@@ -81,8 +85,7 @@ public class SmarterDashboard {
 				}
 			}
 			private void action(){
-				getConnectionStatus();
-				if (!Connection) {
+				if (!getConnectionStatus()) {
 					connection.setText("NO CONNECTION!");
 					connection.setBackground(Color.RED);
 				} else {
@@ -95,7 +98,7 @@ public class SmarterDashboard {
 
 		//new LEDShower(shooting, exe);
 		//new MotorSettingser(settings,exe);
-		new TurretShower(settings,exe);
+		new TurretShower(turret,exe);
 	}
 
 	public static final Color getLEDColor() {
@@ -105,8 +108,8 @@ public class SmarterDashboard {
 		return new Color(red, green, blue);
 	}
 
-	public static void getConnectionStatus() {
-		Connection = table.getBoolean("connected", false);
+	public static boolean getConnectionStatus() {
+		return table.getBoolean("connected", false);
 	}
 
 	public static final void updateConnectionStatus(boolean b) {
