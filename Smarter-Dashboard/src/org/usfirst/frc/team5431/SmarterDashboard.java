@@ -32,13 +32,13 @@ public class SmarterDashboard {
 	
 	public static void main(String[] args) {
 				
-		final JFrame shooting = new JFrame("Vision - Smarter Dashboard");
-		shooting.setSize(2160, 1080);
-		shooting.setIconImage(getImage("res" + File.separator + "logo.png"));
-		shooting.setResizable(false);
-		shooting.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		shooting.setLayout(null);
-		shooting.setVisible(true);
+//		final JFrame shooting = new JFrame("Vision - Smarter Dashboard");
+//		shooting.setSize(2160, 1080);
+//		shooting.setIconImage(getImage("res" + File.separator + "logo.png"));
+//		shooting.setResizable(false);
+//		shooting.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		shooting.setLayout(null);
+//		shooting.setVisible(true);
 		
 		final JFrame turret = new JFrame("Turret - Smarter Dashboard");
 		turret.setSize(2160, 1080);
@@ -56,7 +56,7 @@ public class SmarterDashboard {
 		settings.setLayout(null);
 		settings.setVisible(true);
 		
-		final JLabel connection = new JLabel("Connecting...", SwingConstants.CENTER);
+		final JLabel connection = new JLabel("Starting up...", SwingConstants.CENTER);
 		connection.setBackground(Color.YELLOW);
 		connection.setBounds(0, 0, 200, 50);
 		connection.setOpaque(true);
@@ -109,11 +109,11 @@ public class SmarterDashboard {
 	}
 
 	public static boolean getConnectionStatus() {
-		return table.getBoolean("connected", false);
+		return table.getBoolean("connection", false);
 	}
 
 	public static final void updateConnectionStatus(boolean b) {
-		table.putBoolean("connected", b);
+		table.putBoolean("connection", b);
 	}
 
 	public static final void putLEDRed(int red) {

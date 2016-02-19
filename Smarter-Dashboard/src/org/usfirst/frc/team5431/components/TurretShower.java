@@ -30,21 +30,43 @@ public class TurretShower {
 		turretspeed.setStringPainted(true);
 		turretspeed.setToolTipText("Turret Speed");
 		turretspeed.setBounds(1000, 200, 100, 360);
-		turretspeed.setValue(50);
 		turretspeed.setVisible(true);
 		f.add(turretspeed);
 
+		final JProgressBar leftwheel = new JProgressBar(SwingConstants.VERTICAL, 0, 100);
+		leftwheel.setStringPainted(true);
+		leftwheel.setToolTipText("Left Wheel Speed");
+		leftwheel.setBounds(1500, 200, 100, 360);
+		leftwheel.setVisible(true);
+		f.add(leftwheel);
+
+		final JProgressBar rightwheel = new JProgressBar(SwingConstants.VERTICAL, 0, 100);
+		rightwheel.setStringPainted(true);
+		rightwheel.setToolTipText("Right Wheel Speed");
+		rightwheel.setBounds(1800, 200, 100, 360);
+		rightwheel.setVisible(true);
+		f.add(rightwheel);
+
 		final JSpinner turretmax = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.05));
-		turretmax.setBounds(0, 0, 150, 50);
+		turretmax.setBounds(0, 921, 1000, 50);
 		turretmax.setVisible(true);
 		turretmax.setToolTipText("Turret Max");
 		f.add(turretmax);
 
 		final JSpinner intakemax = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.05));
-		intakemax.setBounds(150, 0, 150, 50);
+		intakemax.setBounds(0, 150, 1000, 50);
 		intakemax.setVisible(true);
 		intakemax.setToolTipText("Intake Max");
 		f.add(intakemax);
+
+		final JLabel boulder = new JLabel();
+		boulder.setBounds(0, 380, 1000, 361);
+		boulder.setOpaque(true);
+		boulder.setVisible(true);
+		boulder.setIcon(new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "ball.png")));
+		f.add(boulder);
+		
+		f.repaint();
 
 		final Thread colorthread = new Thread() {
 			final double tps = 10d;// ticks per second
@@ -64,9 +86,11 @@ public class TurretShower {
 					lastTime = now;
 					if (delta >= 1) {
 						if (!init) {
-							//turretmax.setValue(SmarterDashboard.table.getNumber("turret max"));
-							//intakemax.setValue(SmarterDashboard.table.getNumber("intake max"));
-							init=true;
+							rightwheel.setValue((int) SmarterDashboard.table.getNumber("current right speed", 0.0));
+							leftwheel.setValue((int) SmarterDashboard.table.getNumber("current left speed", 0.0));
+							turretspeed.setValue((int) SmarterDashboard.table.getNumber("current turret speed", 0.0));
+							turretmax.setValue(SmarterDashboard.table.getNumber("turret max", 0.7));
+							intakemax.setValue(SmarterDashboard.table.getNumber("intake max", 0.7));
 						}
 						action();
 						delta--;
@@ -99,6 +123,9 @@ public class TurretShower {
 						turret.setForeground(Color.RED);
 					}
 					turretspeed.setValue((int) (turretSpeed * 100.0));
+
+					leftwheel.setValue((int) (SmarterDashboard.table.getNumber("current left speed", 0.0)));
+					rightwheel.setValue((int) (SmarterDashboard.table.getNumber("current right speed", 0.0)));
 
 					SmarterDashboard.table.putNumber("turret max", (double) turretmax.getValue());
 					SmarterDashboard.table.putNumber("intake max", (double) intakemax.getValue());
