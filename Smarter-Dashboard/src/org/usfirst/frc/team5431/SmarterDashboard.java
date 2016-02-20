@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
+import org.usfirst.frc.team5431.components.USBCameraViewer;
+import org.usfirst.frc.team5431.components.AxisCameraViewer;
 import org.usfirst.frc.team5431.components.LEDShower;
 import org.usfirst.frc.team5431.components.MotorSettingser;
 import org.usfirst.frc.team5431.components.TurretShower;
@@ -62,6 +64,12 @@ public class SmarterDashboard {
 		connection.setOpaque(true);
 		settings.add(connection);
 
+		final JLabel error = new JLabel("Starting up...", SwingConstants.CENTER);
+		error.setBackground(Color.YELLOW);
+		error.setBounds(0, 50, 200, 50);
+		error.setOpaque(true);
+		settings.add(error);
+
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");
 		table = NetworkTable.getTable("5431");
@@ -86,12 +94,13 @@ public class SmarterDashboard {
 			}
 			private void action(){
 				if (!getConnectionStatus()) {
-					connection.setText("No connection");
+					connection.setText("No operator control");
 					connection.setBackground(Color.RED);
 				} else {
 					connection.setText("Enabled");
 					connection.setBackground(Color.GREEN);
 				}
+				error.setText(table.getString("ERROR","None"));
 				updateConnectionStatus(false);
 			}
 		});
@@ -99,6 +108,11 @@ public class SmarterDashboard {
 		//new LEDShower(shooting, exe);
 		//new MotorSettingser(settings,exe);
 		new TurretShower(turret,exe);
+		exe.execute(()->{
+		new AxisCameraViewer(turret,exe);
+		});
+		
+		//connection.add(new USBCameraViewer());
 	}
 
 	public static final Color getLEDColor() {
