@@ -19,6 +19,14 @@ import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class TurretShower {
 	public TurretShower(JFrame f, Executor exe) {
+		
+
+		final JLabel boulder = new JLabel();
+		boulder.setBounds(0, 0, 1000, 361);
+		boulder.setVisible(false);
+		boulder.setIcon(new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "ball.png")));
+		f.add(boulder);
+		
 		final JLabel intake = new JLabel();
 		intake.setBounds(0, 560, 1000, 361);
 		f.add(intake);
@@ -26,6 +34,7 @@ public class TurretShower {
 		final JLabel turret = new JLabel();
 		turret.setBounds(0, 200, 1000, 360);
 		f.add(turret);
+		
 		final JProgressBar turretspeed = new JProgressBar(SwingConstants.VERTICAL, 0, 100);
 		turretspeed.setStringPainted(true);
 		turretspeed.setToolTipText("Turret Speed");
@@ -58,13 +67,6 @@ public class TurretShower {
 		intakemax.setVisible(true);
 		intakemax.setToolTipText("Intake Max");
 		f.add(intakemax);
-
-		final JLabel boulder = new JLabel();
-		boulder.setBounds(0, 380, 1000, 361);
-		boulder.setOpaque(true);
-		boulder.setVisible(true);
-		boulder.setIcon(new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "intake off.png")));
-		f.add(boulder);
 		
 		f.repaint();
 
@@ -91,6 +93,7 @@ public class TurretShower {
 							turretspeed.setValue((int) SmarterDashboard.table.getNumber("current turret speed", 0.0));
 							turretmax.setValue(SmarterDashboard.table.getNumber("turret max", 0.7));
 							intakemax.setValue(SmarterDashboard.table.getNumber("intake max", 0.7));
+							boulder.setVisible(SmarterDashboard.table.getBoolean("boulder",false));
 							init=true;
 						}
 						action();
@@ -126,6 +129,8 @@ public class TurretShower {
 					leftwheel.setValue((int) (SmarterDashboard.table.getNumber("current left speed", 0.0)));
 					rightwheel.setValue((int) (SmarterDashboard.table.getNumber("current right speed", 0.0)));
 
+					boulder.setVisible(SmarterDashboard.table.getBoolean("boulder",false));
+					
 					SmarterDashboard.table.putNumber("turret max", (double) turretmax.getValue());
 					SmarterDashboard.table.putNumber("intake max", (double) intakemax.getValue());
 				} catch (Throwable t) {
