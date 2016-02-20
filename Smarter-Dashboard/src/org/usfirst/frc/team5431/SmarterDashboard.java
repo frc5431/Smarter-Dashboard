@@ -86,10 +86,10 @@ public class SmarterDashboard {
 			}
 			private void action(){
 				if (!getConnectionStatus()) {
-					connection.setText("NO CONNECTION!");
+					connection.setText("No connection");
 					connection.setBackground(Color.RED);
 				} else {
-					connection.setText("Connected");
+					connection.setText("Enabled");
 					connection.setBackground(Color.GREEN);
 				}
 				updateConnectionStatus(false);
