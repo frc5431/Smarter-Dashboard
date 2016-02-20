@@ -108,9 +108,9 @@ public class SmarterDashboard {
 		//new LEDShower(shooting, exe);
 		//new MotorSettingser(settings,exe);
 		new TurretShower(turret,exe);
-		exe.execute(()->{
-		new AxisCameraViewer(turret,exe);
-		});
+		//exe.execute(()->{
+		//new AxisCameraViewer(turret,exe);
+		//});
 		
 		//connection.add(new USBCameraViewer());
 	}
