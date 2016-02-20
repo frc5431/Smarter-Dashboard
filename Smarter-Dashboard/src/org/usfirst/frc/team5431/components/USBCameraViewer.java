@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5431.components;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import javafx.beans.property.IntegerProperty;
@@ -19,6 +20,7 @@ import java.net.Socket;
 import java.net.ConnectException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.concurrent.Executor;
 
 /**
  * SmartDashboard extension for viewing a MJPEG stream from the robot,
@@ -51,14 +53,13 @@ public class USBCameraViewer extends JPanel implements Runnable {
     private Socket socket;
     private Thread thread;
 
-    public USBCameraViewer() {
+    public USBCameraViewer(JFrame f) {
         super();
         setPreferredSize(new Dimension(320, 240));
-        setBounds(0,0,320,240);
+        setBounds(981,0,320,240);
         setVisible(true);
-
-        this.thread = new Thread(this);
-        this.thread.start();
+   
+        f.add(this);
 
         ImageIO.setUseCache(false);
     }    
@@ -138,11 +139,11 @@ public class USBCameraViewer extends JPanel implements Runnable {
                 DataInputStream inputStream = new DataInputStream(this.socket.getInputStream());
                 DataOutputStream outputStream = new DataOutputStream(this.socket.getOutputStream());
 
-                final int framesize = 307200;
+                final int framesize = 480+(int)'x'+640;
                 
                 /* Send the request */
                 outputStream.writeInt(30);
-                outputStream.writeInt(HW_COMPRESSION);
+                outputStream.writeInt(-1);
                 outputStream.writeInt(framesize);
                 outputStream.flush();
 

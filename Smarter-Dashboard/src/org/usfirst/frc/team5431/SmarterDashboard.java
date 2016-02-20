@@ -20,7 +20,7 @@ import org.usfirst.frc.team5431.components.USBCameraViewer;
 import org.usfirst.frc.team5431.components.AxisCameraViewer;
 import org.usfirst.frc.team5431.components.LEDShower;
 import org.usfirst.frc.team5431.components.MotorSettingser;
-import org.usfirst.frc.team5431.components.TurretShower;
+import org.usfirst.frc.team5431.components.RobotDisplay;
 
 //import com.ni.vision.NIVision.GetClassifierSampleInfoResult;
 
@@ -100,19 +100,20 @@ public class SmarterDashboard {
 					connection.setText("Enabled");
 					connection.setBackground(Color.GREEN);
 				}
-				error.setText(table.getString("ERROR","None"));
+				error.setText(table.getString("ERROR","No error"));
 				updateConnectionStatus(false);
 			}
 		});
 
+		new AxisCameraViewer(turret,exe);
 		//new LEDShower(shooting, exe);
 		//new MotorSettingser(settings,exe);
-		new TurretShower(turret,exe);
-		//exe.execute(()->{
-		//new AxisCameraViewer(turret,exe);
-		//});
+		new RobotDisplay(turret,exe);
+//		exe.execute(()->{
+//		new AxisCameraViewer(turret,exe);
+//		});
 		
-		//connection.add(new USBCameraViewer());
+		//exe.execute(new USBCameraViewer(turret));
 	}
 
 	public static final Color getLEDColor() {
