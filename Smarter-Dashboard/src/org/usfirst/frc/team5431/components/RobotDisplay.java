@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JSpinner;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -19,12 +20,7 @@ import javax.swing.SwingConstants;
 import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class RobotDisplay {
-	// AUTO-AIM-SPEED - double Calculated Ball Speed
-	// HOLE-NUM - Which hole does auto go for
-	// HOLE-DISTANCE - Distance from the hole
-	// HOLE-SOLITITY - whether it is a square
-	// HOLE-AREA - area of hole
-	// DISTANCE-DRIVE - Distance the drive has gone
+	// AUTO-AIM-ON - whether it is auto aiming PUT
 
 	public RobotDisplay(JFrame f, Executor exe) {
 
@@ -81,6 +77,7 @@ public class RobotDisplay {
 		f.add(driveleft);
 
 		final JLabel driveright = new JLabel();
+
 		driveright.setVisible(true);
 		driveright.setBounds(bounds);
 		driveright.setIcon(new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "right forward.png")));
@@ -108,24 +105,6 @@ public class RobotDisplay {
 		// rightwheel.setVisible(true);
 		// f.add(rightwheel);
 
-		final JSpinner turretmax = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.05));
-		turretmax.setBounds(961, 150, 500, 50);
-		turretmax.setVisible(true);
-		turretmax.setToolTipText("Turret Max");
-		f.add(turretmax);
-
-		final JSpinner intakemax = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.05));
-		intakemax.setBounds(961, 921, 500, 50);
-		intakemax.setVisible(true);
-		intakemax.setToolTipText("Intake Max");
-		f.add(intakemax);
-
-		final JSpinner overdrive = new JSpinner(new SpinnerNumberModel(0.0, -1.0, 1.0, 0.05));
-		overdrive.setBounds(961, 0, 500, 50);
-		overdrive.setVisible(true);
-		overdrive.setToolTipText("Overdrive");
-		f.add(overdrive);
-
 		f.repaint();
 
 		final Thread colorthread = new Thread() {
@@ -135,7 +114,6 @@ public class RobotDisplay {
 			public void run() {
 				// set the values inside the input boxes to the correct one.
 				// otherwise, it will raise errors
-				boolean init = false;
 				long lastTime = System.nanoTime();
 				double ns = 1000000000 / tps;// 10 times per second
 				// checks immediately for connection
@@ -145,20 +123,6 @@ public class RobotDisplay {
 					delta += (now - lastTime) / ns;
 					lastTime = now;
 					if (delta >= 1) {
-						if (!init) {
-							// rightwheel.setValue((int)
-							// SmarterDashboard.table.getNumber("current right
-							// speed", 0.0));
-							// leftwheel.setValue((int)
-							// SmarterDashboard.table.getNumber("current left
-							// speed", 0.0));
-							turretmax.setValue(SmarterDashboard.table.getNumber("turret max", 0.7));
-							intakemax.setValue(SmarterDashboard.table.getNumber("intake max", 0.7));
-							ball.setVisible(SmarterDashboard.table.getBoolean("boulder", false));
-							robot.setIcon(
-									new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "robot.png")));
-							init = true;
-						}
 						action();
 						delta--;
 					}
@@ -170,6 +134,14 @@ public class RobotDisplay {
 					final boolean isIntaking = SmarterDashboard.table.getBoolean("intake", false);
 					intake.setVisible(isIntaking);
 
+					if (SmarterDashboard.table.getBoolean("INTAKE-REVERSE", false)) {
+						intake.setIcon(new ImageIcon(
+								SmarterDashboard.getImage("res" + File.separator + "intake reverse.png")));
+					} else {
+						intake.setIcon(
+								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "intake on.png")));
+					}
+
 					final boolean isTurreting = SmarterDashboard.table.getBoolean("turret", false);
 					// final double turretSpeed =
 					// SmarterDashboard.table.getNumber("current turret speed",
@@ -177,7 +149,7 @@ public class RobotDisplay {
 					turret.setVisible(isTurreting);
 
 					final double leftvalue = SmarterDashboard.table.getNumber("LEFT-DRIVE", 0.0);
-					if (leftvalue < 0.1 && leftvalue > -0.1) {
+					if (leftvalue < 0.11 && leftvalue > -0.11) {
 						driveleft.setVisible(false);
 					} else {
 						driveleft.setVisible(true);
@@ -206,8 +178,6 @@ public class RobotDisplay {
 								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "right forward.png")));
 					}
 
-					SmarterDashboard.table.putNumber("OVERDRIVE", (double) overdrive.getValue());
-
 					// leftwheel.setValue((int)
 					// (SmarterDashboard.table.getNumber("current left speed",
 					// 0.0)));
@@ -217,9 +187,18 @@ public class RobotDisplay {
 
 					ball.setVisible(SmarterDashboard.table.getBoolean("boulder", false));
 
-					SmarterDashboard.table.putNumber("turret max", (double) turretmax.getValue());
-					SmarterDashboard.table.putNumber("intake max", (double) intakemax.getValue());
+					if (SmarterDashboard.table.getBoolean("AUTO", false)) {
+						robot.setIcon(
+								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "robot auto.png")));
+					} else if (!SmarterDashboard.table.getBoolean("ENABLED", false)) {
+						robot.setIcon(
+								new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "robot off.png")));
 
+					} else {
+						robot.setIcon(new ImageIcon(SmarterDashboard.getImage("res" + File.separator + "robot.png")));
+					}
+
+					
 					// aimassist
 					final String driveval = SmarterDashboard.table.getString("PULL", "NA");
 					final String turnval = SmarterDashboard.table.getString("FIRE", "NA");
@@ -227,7 +206,7 @@ public class RobotDisplay {
 					aimfront.setVisible(false);
 					aimright.setVisible(false);
 					aimleft.setVisible(false);
-					if (driveval.equals("NA") && turnval.equals("NA")) {
+					if (driveval.equals("NA") || turnval.equals("NA")) {
 						// no ball found
 						aimgood.setVisible(true);
 						aimgood.setIcon(new ImageIcon("res" + File.separator + "aimbad.png"));
@@ -239,14 +218,14 @@ public class RobotDisplay {
 						aimgood.setVisible(false);
 
 						// aimassist indicators
-						if(driveval.equals("DF")){
+						if (driveval.equals("DF")) {
 							aimfront.setVisible(true);
-						}else if(driveval.equals("DB")){
+						} else if (driveval.equals("DB")) {
 							aimback.setVisible(true);
 						}
-						if(turnval.equals("TR")){
+						if (turnval.equals("TR")) {
 							aimright.setVisible(true);
-						}else if(turnval.equals("TL")){
+						} else if (turnval.equals("TL")) {
 							aimleft.setVisible(true);
 						}
 					}

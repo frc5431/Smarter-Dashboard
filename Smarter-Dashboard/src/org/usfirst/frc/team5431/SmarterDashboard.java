@@ -42,33 +42,25 @@ public class SmarterDashboard {
 //		shooting.setLayout(null);
 //		shooting.setVisible(true);
 		
-		final JFrame turret = new JFrame("Turret - Smarter Dashboard");
-		turret.setSize(2160, 1080);
-		turret.setIconImage(getImage("res" + File.separator + "logo.png"));
-		turret.setResizable(false);
-		turret.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		turret.setLayout(null);
-		turret.setVisible(true);
-		
-		final JFrame settings = new JFrame("Control Panel - Smarter Dashboard");
-		settings.setSize(200, 600);
-		settings.setIconImage(getImage("res" + File.separator + "logo.png"));
-		settings.setResizable(false);
-		settings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		settings.setLayout(null);
-		settings.setVisible(true);
+		final JFrame frame = new JFrame("Team 5431 - Smarter Dashboard");
+		frame.setSize(2160, 1080);
+		frame.setIconImage(getImage("res" + File.separator + "logo.png"));
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(null);
+		frame.setVisible(true);
 		
 		final JLabel connection = new JLabel("Starting up...", SwingConstants.CENTER);
 		connection.setBackground(Color.YELLOW);
-		connection.setBounds(0, 0, 200, 50);
+		connection.setBounds(0, 950, 2160, 50);
 		connection.setOpaque(true);
-		settings.add(connection);
+		frame.add(connection);
 
-		final JLabel error = new JLabel("Starting up...", SwingConstants.CENTER);
+		final JLabel error = new JLabel("Connecting network tables...", SwingConstants.CENTER);
 		error.setBackground(Color.YELLOW);
-		error.setBounds(0, 50, 200, 50);
+		error.setBounds(0, 1000, 2160, 50);
 		error.setOpaque(true);
-		settings.add(error);
+		frame.add(error);
 
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");
@@ -94,10 +86,10 @@ public class SmarterDashboard {
 			}
 			private void action(){
 				if (!getConnectionStatus()) {
-					connection.setText("No operator control");
+					connection.setText("NO CONNECTION");
 					connection.setBackground(Color.RED);
 				} else {
-					connection.setText("Enabled");
+					connection.setText("Connected to Robot");
 					connection.setBackground(Color.GREEN);
 				}
 				error.setText(table.getString("ERROR","No error"));
@@ -105,10 +97,10 @@ public class SmarterDashboard {
 			}
 		});
 
-		new AxisCameraViewer(turret,exe);
+		//new AxisCameraViewer(turret,exe);
 		//new LEDShower(shooting, exe);
 		//new MotorSettingser(settings,exe);
-		new RobotDisplay(turret,exe);
+		new RobotDisplay(frame,exe);
 //		exe.execute(()->{
 //		new AxisCameraViewer(turret,exe);
 //		});

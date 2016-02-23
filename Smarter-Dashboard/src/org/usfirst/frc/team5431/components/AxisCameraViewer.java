@@ -18,7 +18,7 @@ public class AxisCameraViewer {
 	public AxisCameraViewer(JFrame f, Executor exe){
 		try{
 			JLabel feed = new JLabel();
-			feed.setBounds(981,0,640,480);
+			feed.setBounds(981,500,640,480);
 			f.add(feed);
 			exe.execute(new Thread(){
 				final double tps = 30d;// ticks per second
