@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import org.usfirst.frc.team5431.components.FrontCameraViewer;
 import org.usfirst.frc.team5431.components.RobotDisplay;
 import org.usfirst.frc.team5431.components.TurretDisplay;
 
@@ -88,6 +89,7 @@ public class TurretDashboard {
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
 		new TurretDisplay(frame, exe);
+		new FrontCameraViewer(frame,exe);
 		// exe.execute(()->{
 		// new AxisCameraViewer(turret,exe);
 		// });
