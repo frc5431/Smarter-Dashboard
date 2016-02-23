@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5431.components;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -13,12 +14,12 @@ import javax.swing.JLabel;
 
 import org.usfirst.frc.team5431.SmarterDashboard;
 
-public class AxisCameraViewer {
+public class FrontCameraViewer {
 
-	public AxisCameraViewer(JFrame f, Executor exe){
+	public FrontCameraViewer(JFrame f, Executor exe){
 		try{
 			JLabel feed = new JLabel();
-			feed.setBounds(981,500,640,480);
+			feed.setBounds(0,125,1000,750);
 			f.add(feed);
 			exe.execute(new Thread(){
 				final double tps = 30d;// ticks per second
@@ -43,10 +44,8 @@ public class AxisCameraViewer {
 
 				public void action(){
 				try {
-					feed.setIcon(new ImageIcon(ImageIO.read(new URL("http://10.54.31.50/axis-cgi/jpg/image.cgi"))));
+					feed.setIcon(new ImageIcon(ImageIO.read(new URL("http://10.54.31.51/axis-cgi/jpg/image.cgi")).getScaledInstance(1000, 750, BufferedImage.SCALE_SMOOTH)));
 					feed.repaint();
-					
-					
 				}catch(IOException e){
 					System.err.println(e.getMessage());
 				} catch (Exception e) {
