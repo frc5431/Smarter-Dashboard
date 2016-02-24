@@ -24,7 +24,7 @@ public class RobotDisplay {
 
 	public RobotDisplay(JFrame f, Executor exe) {
 
-		final Rectangle bounds = new Rectangle(0, 0, 960, 960);
+		final Rectangle bounds = new Rectangle(0, 0, 750, 750); //the stuff needs to be 750 and 750
 
 		final JLabel aimright = new JLabel();
 		aimright.setVisible(true);
