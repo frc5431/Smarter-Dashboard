@@ -88,8 +88,8 @@ public class RobotDashboard {
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
-		new IntakeCameraViewer(frame,exe);
 		new RobotDisplay(frame, exe);		// exe.execute(()->{
+		new IntakeCameraViewer(frame,exe);
 		// new AxisCameraViewer(turret,exe);
 		// });
 
