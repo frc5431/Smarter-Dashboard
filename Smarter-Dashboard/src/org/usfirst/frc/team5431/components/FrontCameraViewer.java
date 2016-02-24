@@ -16,19 +16,18 @@ import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class FrontCameraViewer {
 
-	public FrontCameraViewer(JFrame f, Executor exe){
-		try{
+	public FrontCameraViewer(JFrame f, Executor exe) {
+		try {
 			JLabel feed = new JLabel();
-			feed.setBounds(0,125,900,672);
+			feed.setBounds(0, 0, 1217, 943);
 			f.add(feed);
-			exe.execute(new Thread(){
-				final double tps = 30d;// ticks per second
+			exe.execute(new Thread() {// ticks per second
 
 				@Override
 				public void run() {
 
 					long lastTime = System.nanoTime();
-					double ns = 1000000000 / tps;// 10 times per second
+					double ns = 1000000000;
 					// checks immediately for connection
 					double delta = 1;
 					while (true) {
@@ -36,23 +35,23 @@ public class FrontCameraViewer {
 						delta += (now - lastTime) / ns;
 						lastTime = now;
 						if (delta >= 1) {
-							action();
+							try {
+								feed.setIcon(
+										new ImageIcon(ImageIO.read(new URL("http://10.54.31.50/axis-cgi/jpg/image.cgi"))
+												.getScaledInstance(1217, 943, BufferedImage.SCALE_SMOOTH)));
+								feed.repaint();
+							} catch (IOException e) {
+								System.err.println(e.getMessage());
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 							delta--;
 						}
 					}
 				}
 
-				public void action(){
-				try {
-					feed.setIcon(new ImageIcon(ImageIO.read(new URL("http://10.54.31.50/axis-cgi/jpg/image.cgi")).getScaledInstance(900, 672, BufferedImage.SCALE_SMOOTH)));
-					feed.repaint();
-				}catch(IOException e){
-					System.err.println(e.getMessage());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}}
 			});
-		}catch(Throwable t){
+		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 	}

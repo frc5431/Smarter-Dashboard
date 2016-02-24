@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class SmarterDashboard {
 	public static NetworkTable table;
+	public static final int CONNECTION_TPS=1;
 	
 	public static boolean getConnectionStatus() {
 		return table.getBoolean("connection", false);

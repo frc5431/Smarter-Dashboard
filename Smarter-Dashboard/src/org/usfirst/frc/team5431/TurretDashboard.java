@@ -32,7 +32,7 @@ public class TurretDashboard {
 		// shooting.setVisible(true);
 
 		final JFrame frame = new JFrame("Team 5431 - Smarter Dashboard");
-		frame.setSize(2160, 1080);
+		frame.setSize(2160, 1080);//1080
 		frame.setIconImage(SmarterDashboard.getImage("res" + File.separator + "logo.png"));
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,13 +41,13 @@ public class TurretDashboard {
 
 		final JLabel connection = new JLabel("Starting up...", SwingConstants.CENTER);
 		connection.setBackground(Color.YELLOW);
-		connection.setBounds(0, 950, 2160, 50);
+		connection.setBounds(0, 944, 2160, 50);
 		connection.setOpaque(true);
 		frame.add(connection);
 
 		final JLabel error = new JLabel("Connecting network tables...", SwingConstants.CENTER);
 		error.setBackground(Color.YELLOW);
-		error.setBounds(0, 1000, 2160, 50);
+		error.setBounds(0, 994, 2160, 50);
 		error.setOpaque(true);
 		frame.add(error);
 
@@ -66,7 +66,7 @@ public class TurretDashboard {
 			@Override
 			public void run() {
 				long lastTime = System.nanoTime();
-				double ns = 1000000000;
+				double ns = 1000000000/SmarterDashboard.CONNECTION_TPS;
 				// checks immediately for connection
 				double delta = 1;
 				while (true) {

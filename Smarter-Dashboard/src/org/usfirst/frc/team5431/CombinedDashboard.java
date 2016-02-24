@@ -66,7 +66,7 @@ public class CombinedDashboard {
 			@Override
 			public void run() {
 				long lastTime = System.nanoTime();
-				double ns = 1000000000;
+				double ns = 1000000000/SmarterDashboard.CONNECTION_TPS;
 				// checks immediately for connection
 				double delta = 1;
 				while (true) {
