@@ -8,6 +8,8 @@ import java.util.concurrent.Executors;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.usfirst.frc.team5431.components.FrontCameraViewer;
 import org.usfirst.frc.team5431.components.RobotDisplay;
@@ -52,6 +54,12 @@ public class TurretDashboard {
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");
 		SmarterDashboard.table = NetworkTable.getTable("5431");
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
