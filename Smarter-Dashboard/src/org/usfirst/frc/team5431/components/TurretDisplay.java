@@ -53,7 +53,7 @@ public class TurretDisplay {
 		intakemax.setToolTipText("Intake Max");
 		f.add(intakemax);
 
-		final JProgressBar overdrive = new JProgressBar(-100, 100);
+		final JProgressBar overdrive = new JProgressBar(-50, 50);
 		overdrive.setBounds(960, 0, 700, 50);
 		overdrive.setStringPainted(true);
 		overdrive.setVisible(true);
