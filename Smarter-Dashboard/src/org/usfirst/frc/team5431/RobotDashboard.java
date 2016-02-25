@@ -13,15 +13,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import org.usfirst.frc.team5431.components.IntakeCameraViewer;
 import org.usfirst.frc.team5431.components.RobotDisplay;
-import org.usfirst.frc.team5431.components.TurretDisplay;
-
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class RobotDashboard {
 	public static boolean recievedMessage = false;
 	private static final Executor exe = Executors.newCachedThreadPool();
 
 	public static void main(String[] args) {
+		// Jumbo.start(new JumboLaunchConfig("hi", new Dimension(1080, 720),
+		// null, "res" + File.separator + "arial"));
 
 		// final JFrame shooting = new JFrame("Vision - Smarter Dashboard");
 		// shooting.setSize(2160, 1080);
@@ -54,7 +53,7 @@ public class RobotDashboard {
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");
 		SmarterDashboard.table = NetworkTable.getTable("5431");
-		
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
@@ -67,7 +66,7 @@ public class RobotDashboard {
 			@Override
 			public void run() {
 				long lastTime = System.nanoTime();
-				double ns = 1000000000/SmarterDashboard.CONNECTION_TPS;
+				double ns = 1000000000 / SmarterDashboard.CONNECTION_TPS;
 				// checks immediately for connection
 				double delta = 1;
 				while (true) {
@@ -97,8 +96,8 @@ public class RobotDashboard {
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
-		new RobotDisplay(frame, exe);		// exe.execute(()->{
-		new IntakeCameraViewer(frame,exe);
+		new RobotDisplay(frame, exe); // exe.execute(()->{
+		new IntakeCameraViewer(frame, exe);
 		// new AxisCameraViewer(turret,exe);
 		// });
 

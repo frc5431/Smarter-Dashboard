@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/AcademyHS Robotics/2014_Java_sunspotfrcsdk/sunspotfrcsdk/desktop-lib/networktables-desktop.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/AcademyHS Robotics/2014_Java_sunspotfrcsdk/sunspotfrcsdk/desktop-lib/networktables-desktop.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/Jumbo-Engine">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Smarter-Dashboard/native"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
