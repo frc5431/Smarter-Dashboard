@@ -86,7 +86,7 @@ public class TurretDisplay {
 		distancetitle.setBounds(1217, 100, 200, 50);
 		distancetitle.setVisible(true);
 		f.add(distancetitle);
-		final JProgressBar distancebar = new JProgressBar(70, 140);
+		final JProgressBar distancebar = new JProgressBar(60, 140);
 		distancebar.setBounds(1417, 100, 500, 50);
 		distancebar.setVisible(true);
 		f.add(distancebar);

@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.usfirst.frc.team5431.components.USBCameraViewer;
 import org.usfirst.frc.team5431.components.FrontCameraViewer;
@@ -26,22 +29,27 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class SmarterDashboard {
 	public static NetworkTable table;
-	public static final int CONNECTION_TPS=1;
-	
+	public static final int CONNECTION_TPS = 1;
+
+	public static void init() {
+		NetworkTable.setClientMode();
+		NetworkTable.setIPAddress("roborio-5431-frc.local");
+		table = NetworkTable.getTable("5431");
+
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+					| UnsupportedLookAndFeelException e1) {
+				e1.printStackTrace();
+			}
+		
+	}
+
 	public static boolean getConnectionStatus() {
 		return table.getBoolean("connection", false);
 	}
 
 	public static final void updateConnectionStatus(boolean b) {
 		table.putBoolean("connection", b);
-	}
-
-	public static final BufferedImage getImage(String path) {
-		try {
-			return ImageIO.read(new File(path));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 }

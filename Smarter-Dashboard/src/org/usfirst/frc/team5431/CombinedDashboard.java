@@ -32,7 +32,7 @@ public class CombinedDashboard {
 
 		final JFrame frame = new JFrame("Team 5431 - Smarter Dashboard");
 		frame.setSize(2160, 1080);
-		frame.setIconImage(SmarterDashboard.getImage("res" + File.separator + "logo.png"));
+		frame.setIconImage(ResourceHandler.getResource("logo").getImage());
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
@@ -50,16 +50,8 @@ public class CombinedDashboard {
 		error.setOpaque(true);
 		frame.add(error);
 
-		NetworkTable.setClientMode();
-		NetworkTable.setIPAddress("roborio-5431-frc.local");
-		SmarterDashboard.table = NetworkTable.getTable("5431");
-		
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
+		SmarterDashboard.init();
+
 
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
