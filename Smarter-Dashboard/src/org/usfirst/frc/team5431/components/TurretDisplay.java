@@ -183,7 +183,7 @@ public class TurretDisplay {
 
 			private void action() {
 				try {
-
+					sleep(100);
 					final int overdrivevalue = (int) (SmarterDashboard.table.getNumber("OVERDRIVE", 0) * 100.0);
 					overdrive.setValue(overdrivevalue);
 					overdrive.setString("Auto Aim Overdrive: " + overdrivevalue);

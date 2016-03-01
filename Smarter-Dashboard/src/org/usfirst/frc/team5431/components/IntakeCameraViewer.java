@@ -16,45 +16,37 @@ import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class IntakeCameraViewer {
 
-	public IntakeCameraViewer(JFrame f, Executor exe){
-		try{
+	public IntakeCameraViewer(JFrame f, Executor exe) {
+		try {
 			JLabel feed = new JLabel();
-			feed.setBounds(981,125,1000,750);
+			feed.setBounds(981, 125, 1000, 750);
 			f.add(feed);
-			exe.execute(new Thread(){
+			exe.execute(new Thread() {
 				final double tps = 30d;// ticks per second
 
 				@Override
 				public void run() {
 
-					long lastTime = System.nanoTime();
-					double ns = 1000000000 / tps;// 10 times per second
-					// checks immediately for connection
-					double delta = 1;
 					while (true) {
-						long now = System.nanoTime();
-						delta += (now - lastTime) / ns;
-						lastTime = now;
-						if (delta >= 1) {
-							action();
-							delta--;
-						}
+						action();
 					}
 				}
 
-				public void action(){
-				try {
-					feed.setIcon(new ImageIcon(ImageIO.read(new URL("http://10.54.31.51/axis-cgi/jpg/image.cgi")).getScaledInstance(1000, 750, BufferedImage.SCALE_SMOOTH)));
-					feed.repaint();
-					
-					
-				}catch(IOException e){
-					System.err.println(e.getMessage());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}}
+				public void action() {
+					try {
+						sleep(67);
+						feed.setIcon(new ImageIcon(ImageIO.read(new URL("http://10.54.31.51/axis-cgi/jpg/image.cgi"))
+								.getScaledInstance(1000, 750, BufferedImage.SCALE_SMOOTH)));
+						feed.repaint();
+
+					} catch (IOException e) {
+						System.err.println(e.getMessage());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			});
-		}catch(Throwable t){
+		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 	}

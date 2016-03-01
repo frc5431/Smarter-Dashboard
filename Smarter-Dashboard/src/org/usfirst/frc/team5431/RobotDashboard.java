@@ -50,46 +50,41 @@ public class RobotDashboard {
 		error.setBounds(750, 700, 1410, 50);
 		error.setOpaque(true);
 		frame.add(error);
-		
+
 		SmarterDashboard.init();
 
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
 			@Override
 			public void run() {
-				long lastTime = System.nanoTime();
-				double ns = 1000000000/SmarterDashboard.CONNECTION_TPS;
-				// checks immediately for connection
-				double delta = 1;
 				while (true) {
-					long now = System.nanoTime();
-					delta += (now - lastTime) / ns;
-					lastTime = now;
-					if (delta >= 1) {
-						action();
-						delta--;
-					}
+					action();
 				}
 			}
 
 			private void action() {
-				if (!SmarterDashboard.getConnectionStatus()) {
-					connection.setText("NO CONNECTION");
-					connection.setBackground(Color.RED);
-				} else {
-					connection.setText("Connected to Robot");
-					connection.setBackground(Color.GREEN);
+				try {
+					sleep(100);
+					if (!SmarterDashboard.getConnectionStatus()) {
+						connection.setText("NO CONNECTION");
+						connection.setBackground(Color.RED);
+					} else {
+						connection.setText("Connected to Robot");
+						connection.setBackground(Color.GREEN);
+					}
+					error.setText(SmarterDashboard.table.getString("ERROR", "No error"));
+					SmarterDashboard.updateConnectionStatus(false);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				error.setText(SmarterDashboard.table.getString("ERROR", "No error"));
-				SmarterDashboard.updateConnectionStatus(false);
 			}
 		});
 
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
-		new RobotDisplay(frame, exe);		// exe.execute(()->{
-		new IntakeCameraViewer(frame,exe);
+		new RobotDisplay(frame, exe); // exe.execute(()->{
+		new IntakeCameraViewer(frame, exe);
 		// new AxisCameraViewer(turret,exe);
 		// });
 

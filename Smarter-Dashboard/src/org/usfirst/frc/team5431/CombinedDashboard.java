@@ -57,22 +57,12 @@ public class CombinedDashboard {
 		exe.execute(new Thread() {
 			@Override
 			public void run() {
-				long lastTime = System.nanoTime();
-				double ns = 1000000000/SmarterDashboard.CONNECTION_TPS;
-				// checks immediately for connection
-				double delta = 1;
-				while (true) {
-					long now = System.nanoTime();
-					delta += (now - lastTime) / ns;
-					lastTime = now;
-					if (delta >= 1) {
-						action();
-						delta--;
-					}
-				}
+				action();
 			}
 
 			private void action() {
+				try{
+				sleep(100);
 				if (!SmarterDashboard.getConnectionStatus()) {
 					connection.setText("NO CONNECTION");
 					connection.setBackground(Color.RED);
@@ -82,6 +72,9 @@ public class CombinedDashboard {
 				}
 				error.setText(SmarterDashboard.table.getString("ERROR", "No error"));
 				SmarterDashboard.updateConnectionStatus(false);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 		});
 

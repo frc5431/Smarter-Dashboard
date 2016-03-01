@@ -132,6 +132,7 @@ public class RobotDisplay {
 
 			private void action() {
 				try {
+					sleep(100);
 					final boolean isIntaking = SmarterDashboard.table.getBoolean("intake", false);
 					intake.setVisible(isIntaking);
 
