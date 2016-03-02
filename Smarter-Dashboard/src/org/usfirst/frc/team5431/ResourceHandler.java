@@ -13,8 +13,8 @@ public class ResourceHandler {
 	static{
 		final String[] paths = { "aimbad.png", "aimgood.png", "aimleft.png", "aimright.png", "aimfront.png",
 				"aimback.png", "ball.png", "crosshair.png", "intake on.png", "intake reverse.png", "left backward.png",
-				"left backward.png", "logo.png", "right backward.png", "right forward.png", "robot.png", "robot off.png",
-				"robot_auto.png", "turret on.png" };
+				 "logo.png", "right backward.png", "right forward.png", "robot.png", "robot off.png",
+				"robot_auto.png", "turret on.png","left forward.png" };
 		icons = new Resource[paths.length];
 		
 		for(int i =0;i<paths.length;i++){
@@ -36,6 +36,7 @@ public class ResourceHandler {
 		try {
 			return ImageIO.read(new File(path));
 		} catch (IOException e) {
+			System.err.println(path+" is not valid!");
 			e.printStackTrace();
 		}
 		return null;
