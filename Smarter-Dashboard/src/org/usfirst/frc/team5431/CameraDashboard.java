@@ -19,7 +19,7 @@ import org.usfirst.frc.team5431.components.TurretDisplay;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
-public class TurretDashboard {
+public class CameraDashboard {
 	public static boolean recievedMessage = false;
 	private static final Executor exe = Executors.newCachedThreadPool();
 
