@@ -12,6 +12,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.usfirst.frc.team5431.components.FrontCameraViewer;
+import org.usfirst.frc.team5431.components.IntakeCameraViewer;
+import org.usfirst.frc.team5431.components.KinectCameraViewer;
 import org.usfirst.frc.team5431.components.RobotDisplay;
 import org.usfirst.frc.team5431.components.TurretDisplay;
 
@@ -84,8 +86,9 @@ public class TurretDashboard {
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
-		new TurretDisplay(frame, exe);
-		new FrontCameraViewer(frame,exe);
+		new IntakeCameraViewer(frame,exe);
+		new FrontCameraViewer(exe,frame);
+		//new KinectCameraViewer(frame,exe);
 		// exe.execute(()->{
 		// new AxisCameraViewer(turret,exe);
 		// });

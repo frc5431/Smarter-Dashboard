@@ -20,7 +20,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.usfirst.frc.team5431.components.USBCameraViewer;
-import org.usfirst.frc.team5431.components.FrontCameraViewer;
+import org.usfirst.frc.team5431.components.KinectCameraViewer;
 import org.usfirst.frc.team5431.components.RobotDisplay;
 
 //import com.ni.vision.NIVision.GetClassifierSampleInfoResult;
