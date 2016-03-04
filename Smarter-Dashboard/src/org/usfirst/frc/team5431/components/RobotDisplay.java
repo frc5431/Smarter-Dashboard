@@ -195,7 +195,7 @@ public class RobotDisplay {
 								ResourceHandler.getResource("robot off"));
 
 					} else {
-						robot.setIcon(ResourceHandler.getResource("robot.png"));
+						robot.setIcon(ResourceHandler.getResource("robot"));
 					}
 
 					
