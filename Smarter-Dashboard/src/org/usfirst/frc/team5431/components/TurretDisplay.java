@@ -57,7 +57,7 @@ public class TurretDisplay {
 		intakemax.setToolTipText("Intake Max");
 		f.add(intakemax);
 
-		final JProgressBar overdrive = new JProgressBar(-50, 50);
+		final JProgressBar overdrive = new JProgressBar(-100, 100);
 		overdrive.setBounds(1217, 550, 700, 50);//2160 1660
 		overdrive.setStringPainted(true);
 		overdrive.setVisible(true);
@@ -164,29 +164,18 @@ public class TurretDisplay {
 
 			@Override
 			public void run() {
-				// set the values inside the input boxes to the correct one.
-				// otherwise, it will raise errors
-				long lastTime = System.nanoTime();
-				double ns = 1000000000 / tps;// 10 times per second
-				// checks immediately for connection
-				double delta = 1;
-				while (true) {
-					long now = System.nanoTime();
-					delta += (now - lastTime) / ns;
-					lastTime = now;
-					if (delta >= 1) {
-						action();
-						delta--;
-					}
+				while(true){
+					action();
 				}
 			}
 
 			private void action() {
 				try {
 					sleep(100);
-					final int overdrivevalue = (int) (SmarterDashboard.table.getNumber("OVERDRIVE", 0) * 100.0);
-					overdrive.setValue(overdrivevalue);
-					overdrive.setString("Auto Aim Overdrive: " + overdrivevalue);
+					final double overdrivevalue =  (SmarterDashboard.table.getNumber("OVERDRIVE", 0));
+					overdrive.setValue((int)(overdrivevalue*100.0));
+					overdrive.setString("Overdrive: " + overdrivevalue);
+					SmarterDashboard.table.putNumber("OVERDRIVE", (double) turretmax.getValue());
 					// leftwheel.setValue((int)
 					// (SmarterDashboard.table.getNumber("current left speed",
 					// 0.0)));
@@ -194,7 +183,7 @@ public class TurretDisplay {
 					// (SmarterDashboard.table.getNumber("current right speed",
 					// 0.0)));
 
-					SmarterDashboard.table.putNumber("turret max", (double) turretmax.getValue());
+					//SmarterDashboard.table.putNumber("turret max", (double) turretmax.getValue());
 					SmarterDashboard.table.putNumber("intake max", (double) intakemax.getValue());
 
 					final int leftspeed = (int)SmarterDashboard.table.getNumber("FLY-LEFT",0.0),rightspeed=(int)SmarterDashboard.table.getNumber("FLY-RIGHT",0.0);
@@ -207,8 +196,10 @@ public class TurretDisplay {
 							+ System.lineSeparator() + "Hole area:" + SmarterDashboard.table.getNumber("HOLE-AREA", 0.0)
 							+ System.lineSeparator() + "Hole solidity: "
 							+ SmarterDashboard.table.getNumber("HOLE-SOLIDITY", 0.0) + System.lineSeparator()
-							+ System.lineSeparator() + "Drive distance: "
-							+ SmarterDashboard.table.getNumber("DISTANCE-DRIVE", 0.0));
+							+ "\n" + "Drive distance \n LEFT: "
+							+ SmarterDashboard.table.getNumber("DRIVE-DISTANCE-LEFT", 0.0)+"\nRIGHT: "+SmarterDashboard.table.getNumber("DRIVE-DISTANCE-RIGHT", 0.0)
+							);
+					//"\n"+SmarterDashboard.table.getString("DEBUG")
 
 					final double autospeed = SmarterDashboard.table.getNumber("AUTO-AIM-SPEED", 0.0);
 					aimtitle.setText("Calculated Flywheel Speed: " + autospeed);

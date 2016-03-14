@@ -1,5 +1,11 @@
 package org.usfirst.frc.team5431.components;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,29 +24,47 @@ public class IntakeCameraViewer {
 
 	public IntakeCameraViewer(JFrame f, Executor exe) {
 		try {
-			JLabel feed = new JLabel();
-			feed.setBounds(981, 125, 1000, 750);
+			final Rectangle r = new Rectangle(981, 125, 1000, 750);
+			final JLabel feed = new JLabel();
+			feed.setBounds(r);
 			f.add(feed);
 			exe.execute(new Thread() {
 				final double tps = 30d;// ticks per second
 
 				@Override
 				public void run() {
-
 					while (true) {
 						action();
 					}
 				}
 
-				public void action() {
+				final URL url = new URL("http://10.54.31.51/axis-cgi/jpg/image.cgi");
+				
+				public void action() {					
 					try {
+						System.out.println("HEY");
 						sleep(67);
-						feed.setIcon(new ImageIcon(ImageIO.read(new URL("http://10.54.31.51/axis-cgi/jpg/image.cgi"))
-								.getScaledInstance(1000, 750, BufferedImage.SCALE_SMOOTH)));
+						final Graphics g = feed.getGraphics();
+						g.setFont(Font.getFont(Font.MONOSPACED));
+						try {
+							final Image icon = ImageIO.read(url)
+									.getScaledInstance(r.width, r.height, BufferedImage.SCALE_SMOOTH);
+							g.drawImage(icon, 0, 0, r.width, r.height, null);
+							g.setColor(Color.GREEN);
+							g.drawRect(0, 0, r.width, 50);
+							g.drawString("INTAKE CAMERA - CONNECTED - "+url.getFile(), 0, 0);
+						} catch (IOException e) {
+							System.err.println(e.getMessage());
+							if(g!=null){
+							g.setColor(Color.RED);
+							g.drawRect(0, 0, r.width, 50);
+							g.drawString("INTAKE CAMERA - "+e.getMessage()+" "+url.getFile(), 0, 0);
+							g.setFont(Font.getFont(Font.SERIF).deriveFont(Font.BOLD, 64));
+							}
+							//g.drawString("X", r.width/2, r.height/2);
+						}
+						g.dispose();
 						feed.repaint();
-
-					} catch (IOException e) {
-						System.err.println(e.getMessage());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

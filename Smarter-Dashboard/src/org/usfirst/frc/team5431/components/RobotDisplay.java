@@ -22,7 +22,8 @@ import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class RobotDisplay {
 	// AUTO-AIM-ON - whether it is auto aiming PUT
-
+	//
+	
 	public RobotDisplay(JFrame f, Executor exe) {
 
 		final Rectangle bounds = new Rectangle(0, 0, 750, 750); //the stuff needs to be 750 and 750
@@ -113,20 +114,9 @@ public class RobotDisplay {
 
 			@Override
 			public void run() {
-				// set the values inside the input boxes to the correct one.
-				// otherwise, it will raise errors
-				long lastTime = System.nanoTime();
-				double ns = 1000000000 / tps;// 10 times per second
-				// checks immediately for connection
-				double delta = 1;
-				while (true) {
-					long now = System.nanoTime();
-					delta += (now - lastTime) / ns;
-					lastTime = now;
-					if (delta >= 1) {
-						action();
-						delta--;
-					}
+				while(true)
+				{
+					action();
 				}
 			}
 
@@ -149,7 +139,7 @@ public class RobotDisplay {
 					// 0.0);
 					turret.setVisible(isTurreting);
 
-					final double leftvalue = SmarterDashboard.table.getNumber("LEFT-DRIVE", 0.0);
+					final double leftvalue = -SmarterDashboard.table.getNumber("LEFT-DRIVE", 0.0);
 					if (leftvalue < 0.11 && leftvalue > -0.11) {
 						driveleft.setVisible(false);
 					} else {
@@ -164,7 +154,7 @@ public class RobotDisplay {
 								ResourceHandler.getResource("left forward"));
 					}
 
-					final double rightvalue = SmarterDashboard.table.getNumber("RIGHT-DRIVE", 0.0);
+					final double rightvalue = -SmarterDashboard.table.getNumber("RIGHT-DRIVE", 0.0);
 					if (rightvalue < 0.1 && rightvalue > -0.1) {
 						driveright.setVisible(false);
 					} else {
@@ -189,7 +179,7 @@ public class RobotDisplay {
 
 					if (SmarterDashboard.table.getBoolean("AUTO", false)) {
 						robot.setIcon(
-								ResourceHandler.getResource("robot auto"));
+								ResourceHandler.getResource("robot_auto"));
 					} else if (!SmarterDashboard.table.getBoolean("ENABLED", false)) {
 						robot.setIcon(
 								ResourceHandler.getResource("robot off"));

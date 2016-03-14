@@ -39,12 +39,6 @@ public class RobotDashboard {
 		frame.setLayout(null);
 		frame.setVisible(true);
 
-		final JLabel connection = new JLabel("Starting up...", SwingConstants.CENTER);
-		connection.setBackground(Color.YELLOW);
-		connection.setBounds(750, 650, 1410, 50);
-		connection.setOpaque(true);
-		frame.add(connection);
-
 		final JLabel error = new JLabel("Connecting network tables...", SwingConstants.CENTER);
 		error.setBackground(Color.YELLOW);
 		error.setBounds(750, 700, 1410, 50);
@@ -65,13 +59,6 @@ public class RobotDashboard {
 			private void action() {
 				try {
 					sleep(100);
-					if (!SmarterDashboard.getConnectionStatus()) {
-						connection.setText("NO CONNECTION");
-						connection.setBackground(Color.RED);
-					} else {
-						connection.setText("Connected to Robot");
-						connection.setBackground(Color.GREEN);
-					}
 					error.setText(SmarterDashboard.table.getString("ERROR", "No error"));
 					SmarterDashboard.updateConnectionStatus(false);
 				} catch (Exception e) {
