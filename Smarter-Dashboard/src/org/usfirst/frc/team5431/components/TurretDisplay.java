@@ -175,7 +175,7 @@ public class TurretDisplay {
 					final double overdrivevalue =  (SmarterDashboard.table.getNumber("OVERDRIVE", 0));
 					overdrive.setValue((int)(overdrivevalue*100.0));
 					overdrive.setString("Overdrive: " + overdrivevalue);
-					SmarterDashboard.table.putNumber("OVERDRIVE", (double) turretmax.getValue());
+					//SmarterDashboard.table.putNumber("OVERDRIVE", (double) turretmax.getValue());
 					// leftwheel.setValue((int)
 					// (SmarterDashboard.table.getNumber("current left speed",
 					// 0.0)));

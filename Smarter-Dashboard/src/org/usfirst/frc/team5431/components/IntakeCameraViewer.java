@@ -38,7 +38,7 @@ public class IntakeCameraViewer {
 					}
 				}
 
-				final URL url = new URL("http://10.54.31.51/axis-cgi/jpg/image.cgi");
+				final URL url = new URL("http://10.54.31.59/axis-cgi/jpg/image.cgi");
 				
 				public void action() {					
 					try {

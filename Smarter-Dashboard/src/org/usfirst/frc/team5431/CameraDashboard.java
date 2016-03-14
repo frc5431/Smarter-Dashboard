@@ -87,7 +87,7 @@ public class CameraDashboard {
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
 		new IntakeCameraViewer(frame,exe);
-		new FrontCameraViewer(exe,frame);
+		//new FrontCameraViewer(exe,frame);
 		//new KinectCameraViewer(frame,exe);
 		// exe.execute(()->{
 		// new AxisCameraViewer(turret,exe);
