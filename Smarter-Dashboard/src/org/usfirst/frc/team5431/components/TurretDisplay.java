@@ -39,14 +39,14 @@ public class TurretDisplay {
 		// rightwheel.setVisible(true);
 		// f.add(rightwheel);
 
-		final JLabel turrettitle = new JLabel("Manual Turret Speed");
-		turrettitle.setBounds(1217, 400, 150, 50);
-		f.add(turrettitle);
-		final JSpinner turretmax = new JSpinner(new SpinnerNumberModel(0.7, 0.0, 1.0, 0.05));
-		turretmax.setBounds(1417, 400, 500, 50);
-		turretmax.setVisible(true);
-		turretmax.setToolTipText("Turret Max");
-		f.add(turretmax);
+//		final JLabel turrettitle = new JLabel("Manual Turret Speed");
+//		turrettitle.setBounds(1217, 400, 150, 50);
+//		f.add(turrettitle);
+//		final JSpinner turretmax = new JSpinner(new SpinnerNumberModel(0.7, 0.0, 1.0, 0.05));
+//		turretmax.setBounds(1417, 400, 500, 50);
+//		turretmax.setVisible(true);
+//		turretmax.setToolTipText("Turret Max");
+//		f.add(turretmax);
 
 		final JLabel intaketitle = new JLabel("Manual Intake Speed");
 		intaketitle.setBounds(1217, 450, 150, 50);
@@ -57,7 +57,7 @@ public class TurretDisplay {
 		intakemax.setToolTipText("Intake Max");
 		f.add(intakemax);
 
-		final JProgressBar overdrive = new JProgressBar(-100, 100);
+		final JProgressBar overdrive = new JProgressBar(75, 100);
 		overdrive.setBounds(1217, 550, 700, 50);//2160 1660
 		overdrive.setStringPainted(true);
 		overdrive.setVisible(true);
