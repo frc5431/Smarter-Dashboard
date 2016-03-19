@@ -10,6 +10,7 @@ import java.util.concurrent.Executor;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -62,6 +63,12 @@ public class TurretDisplay {
 		overdrive.setStringPainted(true);
 		overdrive.setVisible(true);
 		f.add(overdrive);
+		
+		final JComboBox<?> autochooser = new JComboBox<Object>(new String[]{
+				"StandStill","Left","Middle","Right"
+		});
+		autochooser.setBounds(1217,650,700,50);
+		f.add(autochooser);
 
 		// 2160
 		final JTextArea debug = new JTextArea("Starting..");
@@ -198,8 +205,8 @@ public class TurretDisplay {
 							+ SmarterDashboard.table.getNumber("HOLE-SOLIDITY", 0.0) + System.lineSeparator()
 							+ "\n" + "Drive distance \n LEFT: "
 							+ SmarterDashboard.table.getNumber("DRIVE-DISTANCE-LEFT", 0.0)+"\nRIGHT: "+SmarterDashboard.table.getNumber("DRIVE-DISTANCE-RIGHT", 0.0)
-							);
-					//"\n"+SmarterDashboard.table.getString("DEBUG")
+							+"\n"+SmarterDashboard.table.getString("DEBUG","No connection to debug stream"));
+					
 
 					final double autospeed = SmarterDashboard.table.getNumber("AUTO-AIM-SPEED", 0.0);
 					aimtitle.setText("Calculated Flywheel Speed: " + autospeed);
@@ -221,6 +228,8 @@ public class TurretDisplay {
 					}
 					distancetitle.setText("Hole Distance: " + distance);
 
+					SmarterDashboard.table.putString("AUTO-SELECTED", (String)autochooser.getSelectedItem());
+					
 					distancebar.setValue(distance > 140 ? 140 : (distance < 70 ? 70 : (int) distance));
 				} catch (Throwable t) {
 					t.printStackTrace();
