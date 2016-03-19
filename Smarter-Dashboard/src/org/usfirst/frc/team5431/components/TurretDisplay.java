@@ -64,10 +64,13 @@ public class TurretDisplay {
 		overdrive.setVisible(true);
 		f.add(overdrive);
 		
+		final JLabel autotitle = new JLabel("Autonomous Choice");
+		autotitle.setBounds(1217, 650, 150, 50);
+		f.add(autotitle);
 		final JComboBox<?> autochooser = new JComboBox<Object>(new String[]{
-				"StandStill","Left","Middle","Right"
+				"Moat", "TouchOuterWork", "Lowbar", "AutoShoot", "StandStill", "CrossOuter"
 		});
-		autochooser.setBounds(1217,650,700,50);
+		autochooser.setBounds(1417,650,700,50);
 		f.add(autochooser);
 
 		// 2160
