@@ -1,25 +1,17 @@
 package org.usfirst.frc.team5431;
 
 import java.awt.Color;
-import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-import org.usfirst.frc.team5431.components.FrontCameraViewer;
 import org.usfirst.frc.team5431.components.IntakeCameraViewer;
-import org.usfirst.frc.team5431.components.KinectCameraViewer;
-import org.usfirst.frc.team5431.components.RobotDisplay;
-import org.usfirst.frc.team5431.components.TurretDisplay;
+import org.usfirst.frc.team5431.components.USBCameraViewer;
 
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-
-public class CameraDashboard {
+public class USBCamDashboard {
 	private static final Executor exe = Executors.newCachedThreadPool();
 
 	public static void main(String[] args) {
@@ -40,6 +32,8 @@ public class CameraDashboard {
 		frame.setLayout(null);
 		frame.setVisible(true);
 
+		//SmarterDashboard.init();
+
 
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
@@ -52,7 +46,8 @@ public class CameraDashboard {
 
 			private void action() {
 				try{
-				sleep(100);
+				//sleep(1);
+				frame.repaint();
 				}catch(Exception e){
 					e.printStackTrace();
 				}
@@ -62,7 +57,7 @@ public class CameraDashboard {
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
-		new FrontCameraViewer(frame,exe);
+		frame.add(new USBCameraViewer());
 		//new FrontCameraViewer(exe,frame);
 		//new KinectCameraViewer(frame,exe);
 		// exe.execute(()->{

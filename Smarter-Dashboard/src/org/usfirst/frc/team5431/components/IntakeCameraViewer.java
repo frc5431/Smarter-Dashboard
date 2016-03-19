@@ -42,23 +42,22 @@ public class IntakeCameraViewer {
 				
 				public void action() {					
 					try {
-						System.out.println("HEY");
 						sleep(67);
 						final Graphics g = feed.getGraphics();
-						g.setFont(Font.getFont(Font.MONOSPACED));
+		//	g.setFont(Font.getFont(Font.MONOSPACED));
 						try {
 							final Image icon = ImageIO.read(url)
 									.getScaledInstance(r.width, r.height, BufferedImage.SCALE_SMOOTH);
 							g.drawImage(icon, 0, 0, r.width, r.height, null);
 							g.setColor(Color.GREEN);
 							g.drawRect(0, 0, r.width, 50);
-							g.drawString("INTAKE CAMERA - CONNECTED - "+url.getFile(), 0, 0);
+							g.drawString("CAMERA - CONNECTED - "+url.getFile(), 0, 0);
 						} catch (IOException e) {
 							System.err.println(e.getMessage());
 							if(g!=null){
 							g.setColor(Color.RED);
 							g.drawRect(0, 0, r.width, 50);
-							g.drawString("INTAKE CAMERA - "+e.getMessage()+" "+url.getFile(), 0, 0);
+							g.drawString("CAMERA - "+e.getMessage()+" "+url.getFile(), 0, 0);
 							g.setFont(Font.getFont(Font.SERIF).deriveFont(Font.BOLD, 64));
 							}
 							//g.drawString("X", r.width/2, r.height/2);
