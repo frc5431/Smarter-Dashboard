@@ -20,6 +20,7 @@ import org.usfirst.frc.team5431.components.TurretDisplay;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class CameraDashboard {
+	public static boolean recievedMessage = false;
 	private static final Executor exe = Executors.newCachedThreadPool();
 
 	public static void main(String[] args) {
@@ -33,13 +34,12 @@ public class CameraDashboard {
 		// shooting.setVisible(true);
 
 		final JFrame frame = new JFrame("Team 5431 - Smarter Dashboard");
-		frame.setSize(2160, 1080);//1080
+		frame.setSize(1000, 1000);//1080
 		frame.setIconImage(ResourceHandler.getResource("logo").getImage());
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);
-
 
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
@@ -52,7 +52,8 @@ public class CameraDashboard {
 
 			private void action() {
 				try{
-				sleep(100);
+				sleep(1000/15);//30 fps
+				frame.repaint();
 				}catch(Exception e){
 					e.printStackTrace();
 				}
@@ -62,7 +63,7 @@ public class CameraDashboard {
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
-		new FrontCameraViewer(frame,exe);
+		frame.add(new FrontCameraViewer(frame.getSize(),frame));
 		//new FrontCameraViewer(exe,frame);
 		//new KinectCameraViewer(frame,exe);
 		// exe.execute(()->{

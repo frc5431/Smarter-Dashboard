@@ -27,7 +27,7 @@ public class USBCamDashboard {
 		final JFrame frame = new JFrame("Team 5431 - Smarter Dashboard");
 		frame.setSize(2160, 1080);//1080
 		frame.setIconImage(ResourceHandler.getResource("logo").getImage());
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);

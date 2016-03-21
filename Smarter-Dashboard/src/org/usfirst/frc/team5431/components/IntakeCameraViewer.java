@@ -63,6 +63,7 @@ public class IntakeCameraViewer {
 							//g.drawString("X", r.width/2, r.height/2);
 						}
 						g.dispose();
+						
 						feed.repaint();
 					} catch (Exception e) {
 						e.printStackTrace();

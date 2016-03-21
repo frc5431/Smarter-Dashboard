@@ -53,10 +53,11 @@ public class USBCameraViewer extends JPanel{
 		}
 	//	super.paint(g);
 		//,rect.width,rect.height
-		g.drawImage(cam.getImage(),0,0,rect.width,rect.height,null);
+		final Rectangle bounds = getParent().getBounds();
+		g.drawImage(cam.getImage(),0,0,bounds.width,bounds.height,null);
 		g.setColor(Color.WHITE);
 		g.setFont(f);
-		g.drawString(name+" recording at "+cam.getFPS()+" FPS ("+outfps+" actual) at "+viewsize.width+"x"+viewsize.height, 0, 16);
+		g.drawString(name+" recording at "+cam.getFPS()+" FPS ("+outfps+" UPS) at "+viewsize.width+"x"+viewsize.height, 0, 16);
 		g.dispose();
 	}
 }
