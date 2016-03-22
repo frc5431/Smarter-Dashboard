@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import org.usfirst.frc.team5431.components.BallDisplay;
 import org.usfirst.frc.team5431.components.FrontCameraViewer;
 import org.usfirst.frc.team5431.components.USBCameraViewer;
 
@@ -25,15 +26,14 @@ public class DriverDashboard {
 		// shooting.setVisible(true);
 
 		final JFrame frame = new JFrame("Team 5431 - Smarter Dashboard");
-		frame.setSize(2160, 1080);//1080
+		frame.setSize(2160, 1080);// 1080
 		frame.setIconImage(ResourceHandler.getResource("logo").getImage());
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);
 
-		//SmarterDashboard.init();
-
+		// SmarterDashboard.init();
 
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
@@ -45,10 +45,10 @@ public class DriverDashboard {
 			}
 
 			private void action() {
-				try{
-				sleep(1);
-				frame.repaint();
-				}catch(Exception e){
+				try {
+					sleep(1);
+					frame.repaint();
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -57,9 +57,11 @@ public class DriverDashboard {
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
+		frame.add(new BallDisplay(frame.getSize()));
 		frame.add(new FrontCameraViewer(frame.getSize(), frame));
-		//new FrontCameraViewer(exe,frame);
-		//new KinectCameraViewer(frame,exe);
+
+		// new FrontCameraViewer(exe,frame);
+		// new KinectCameraViewer(frame,exe);
 		// exe.execute(()->{
 		// new AxisCameraViewer(turret,exe);
 		// });
