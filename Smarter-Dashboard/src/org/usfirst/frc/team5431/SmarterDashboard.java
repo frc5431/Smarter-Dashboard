@@ -20,7 +20,10 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.usfirst.frc.team5431.components.USBCameraViewer;
-import org.usfirst.frc.team5431.components.KinectCameraViewer;
+
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+
 import org.usfirst.frc.team5431.components.RobotDisplay;
 
 //import com.ni.vision.NIVision.GetClassifierSampleInfoResult;
@@ -31,6 +34,14 @@ public class SmarterDashboard {
 	public static NetworkTable table;
 	public static final int CONNECTION_TPS = 1;
 
+	public static void main(String... args){
+		SmarterDashboard.init();
+		
+		CameraDashboard.main(null);
+		DriverDashboard.main(null);
+		RobotDashboard.main(null);
+	}
+	
 	public static void init() {
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");

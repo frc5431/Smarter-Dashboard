@@ -11,7 +11,6 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.usfirst.frc.team5431.components.IntakeCameraViewer;
 import org.usfirst.frc.team5431.components.RobotDisplay;
 import org.usfirst.frc.team5431.components.TurretDisplay;
 
@@ -45,7 +44,7 @@ public class RobotDashboard {
 		error.setOpaque(true);
 		frame.add(error);
 
-		SmarterDashboard.init();
+//		SmarterDashboard.init();
 
 		// connection thread, updates once per second
 		exe.execute(new Thread() {

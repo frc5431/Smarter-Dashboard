@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.usfirst.frc.team5431.CameraHandler;
 import org.usfirst.frc.team5431.ResourceHandler;
 
 import com.github.sarxos.webcam.Webcam;
@@ -33,31 +34,19 @@ import com.github.sarxos.webcam.ds.ipcam.impl.IpCamMJPEGStream;
 public class FrontCameraViewer extends JPanel{
 	final Rectangle r = new Rectangle(0, 0, 2160, 1080);
 	Dimension windowsize;
-	Webcam cam;
-
-	static {
-		try{
-	    Webcam.setDriver(new IpCamDriver());
-		}catch(Throwable t){
-			t.printStackTrace();
-		}
-	}
 	
-	private void createCamera(){
-		try{
-		cam = Webcam.getDefault();
-		System.out.println(cam.getName());
-		}catch(Throwable t){
-			t.printStackTrace();
-		}
-		}
+	
+	
+	final TargetingLine l = new TargetingLine();
+
+
 	
 	public FrontCameraViewer(Dimension windowsize,JFrame f){	
 		try{
-	    IpCamDeviceRegistry.register(new IpCamDevice("AXIS M1004-W Network Camera", new URL("http://10.54.31.59/mjpg/video.mjpg"), IpCamMode.PUSH));
-		createCamera();
 		setBounds(r);
-	    f.add(new WebcamPanel(Webcam.getDefault()));
+	    f.add(new WebcamPanel(CameraHandler.getCamera()));
+		l.setBounds(r);
+		f.add(l);
 		this.windowsize=windowsize;
 		}catch(Throwable t){
 			t.printStackTrace();
@@ -80,22 +69,20 @@ public class FrontCameraViewer extends JPanel{
 				fps=0;
 				startTime=System.currentTimeMillis();
 			}
+			
+			final Webcam cam =  CameraHandler.getCamera();
 			if(cam==null){
 				throw new IOException("Cam not open");
 			}
-			final BufferedImage img =  cam.getImage();
+			final BufferedImage img =  CameraHandler.getImage();
 			if(img==null)throw new IOException("Image is null!");
 			g.drawImage(img, 0, 0,bounds.width,bounds.height, null);
-			g.setColor(new Color(0,0,0,100));
-			g.fillRect((bounds.width/2)-(25+28), 0, 25, bounds.height);
-			g.setColor(new Color(255,0,0,100));
-			g.fillRect((bounds.width/2)-28, 0, 25, bounds.height);
 			g.setColor(Color.WHITE);
 			final Dimension viewsize = cam.getViewSize();
 			g.drawString(cam.getName()+" recording at "+cam.getFPS()+" FPS ("+outfps+" UPS) at "+viewsize.width+"x"+viewsize.height, 0, 16);
 			g.dispose();
+			l.repaint();
 		} catch (IOException|WebcamException e) {
-			createCamera();
 			g.setColor(Color.RED);
 			g.fillRect(0, 0, r.width, r.height);
 			g.setColor(Color.WHITE);

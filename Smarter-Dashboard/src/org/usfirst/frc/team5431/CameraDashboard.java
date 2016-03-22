@@ -12,10 +12,11 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.usfirst.frc.team5431.components.FrontCameraViewer;
-import org.usfirst.frc.team5431.components.IntakeCameraViewer;
-import org.usfirst.frc.team5431.components.KinectCameraViewer;
 import org.usfirst.frc.team5431.components.RobotDisplay;
 import org.usfirst.frc.team5431.components.TurretDisplay;
+
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -40,7 +41,7 @@ public class CameraDashboard {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);
-
+	
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
 			@Override
@@ -52,8 +53,9 @@ public class CameraDashboard {
 
 			private void action() {
 				try{
-				sleep(1000/15);//30 fps
+				sleep(1);
 				frame.repaint();
+				CameraHandler.refreshImage();
 				}catch(Exception e){
 					e.printStackTrace();
 				}

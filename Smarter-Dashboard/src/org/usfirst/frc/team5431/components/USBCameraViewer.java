@@ -23,6 +23,7 @@ public class USBCameraViewer extends JPanel{
 	private int fps=0,outfps=0;
 
 	public USBCameraViewer(){
+		Webcam.resetDriver();
 		final List<Webcam> cams = Webcam.getWebcams();
 		for(Webcam w : cams){
 			System.out.println(w.getName());

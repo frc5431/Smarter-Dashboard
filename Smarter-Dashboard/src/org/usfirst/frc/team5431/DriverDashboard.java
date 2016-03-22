@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import org.usfirst.frc.team5431.components.IntakeCameraViewer;
+import org.usfirst.frc.team5431.components.FrontCameraViewer;
 import org.usfirst.frc.team5431.components.USBCameraViewer;
 
-public class USBCamDashboard {
+public class DriverDashboard {
 	private static final Executor exe = Executors.newCachedThreadPool();
 
 	public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class USBCamDashboard {
 
 			private void action() {
 				try{
-				//sleep(1);
+				sleep(1);
 				frame.repaint();
 				}catch(Exception e){
 					e.printStackTrace();
@@ -57,7 +57,7 @@ public class USBCamDashboard {
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
-		frame.add(new USBCameraViewer());
+		frame.add(new FrontCameraViewer(frame.getSize(), frame));
 		//new FrontCameraViewer(exe,frame);
 		//new KinectCameraViewer(frame,exe);
 		// exe.execute(()->{
