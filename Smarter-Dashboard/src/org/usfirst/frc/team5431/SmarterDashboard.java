@@ -34,15 +34,13 @@ public class SmarterDashboard {
 	public static NetworkTable table;
 	public static final int CONNECTION_TPS = 1;
 
-	public static void main(String... args){
-		SmarterDashboard.init();
-		
+	public static void main(String... args){		
 		CameraDashboard.main(null);
 		DriverDashboard.main(null);
 		RobotDashboard.main(null);
 	}
 	
-	public static void init() {
+	static{
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");
 		table = NetworkTable.getTable("5431");
@@ -53,7 +51,6 @@ public class SmarterDashboard {
 					| UnsupportedLookAndFeelException e1) {
 				e1.printStackTrace();
 			}
-		
 	}
 
 	public static boolean getConnectionStatus() {

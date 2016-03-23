@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5431;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -11,7 +13,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import org.usfirst.frc.team5431.components.BallDisplay;
 import org.usfirst.frc.team5431.components.FrontCameraViewer;
+import org.usfirst.frc.team5431.components.MotorRPM;
 import org.usfirst.frc.team5431.components.RobotDisplay;
 import org.usfirst.frc.team5431.components.TurretDisplay;
 
@@ -41,7 +45,9 @@ public class CameraDashboard {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);
-	
+		
+		new MotorRPM(new Point(0,500),true, frame,exe);
+			
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
 			@Override
@@ -65,7 +71,9 @@ public class CameraDashboard {
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
+		frame.add(new BallDisplay(frame.getSize()));
 		frame.add(new FrontCameraViewer(frame.getSize(),frame));
+
 		//new FrontCameraViewer(exe,frame);
 		//new KinectCameraViewer(frame,exe);
 		// exe.execute(()->{

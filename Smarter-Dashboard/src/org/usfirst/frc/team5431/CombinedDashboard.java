@@ -50,9 +50,6 @@ public class CombinedDashboard {
 		error.setOpaque(true);
 		frame.add(error);
 
-		SmarterDashboard.init();
-
-
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
 			@Override
