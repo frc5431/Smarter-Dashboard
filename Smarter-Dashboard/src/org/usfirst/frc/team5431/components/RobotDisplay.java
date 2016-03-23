@@ -90,6 +90,10 @@ public class RobotDisplay {
 		robot.setBounds(bounds);
 		robot.setIcon(ResourceHandler.getResource("robot off"));
 		f.add(robot);
+		
+		final Chopper choppers = new Chopper();
+		choppers.setBounds(new Rectangle(800,0,250,250));
+		f.add(choppers);
 
 		// final JProgressBar leftwheel = new
 		// JProgressBar(SwingConstants.VERTICAL, 0, 100);

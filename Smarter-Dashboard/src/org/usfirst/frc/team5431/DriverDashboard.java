@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5431;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import org.usfirst.frc.team5431.components.BallDisplay;
+import org.usfirst.frc.team5431.components.Chopper;
 import org.usfirst.frc.team5431.components.FrontCameraViewer;
 import org.usfirst.frc.team5431.components.USBCameraViewer;
 
@@ -58,6 +60,9 @@ public class DriverDashboard {
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
 		frame.add(new BallDisplay(frame.getSize()));
+		final Chopper choppers = new Chopper();
+		choppers.setBounds(new Rectangle(0,500,250,250));
+		frame.add(choppers);
 		frame.add(new FrontCameraViewer(frame.getSize(), frame));
 
 		// new FrontCameraViewer(exe,frame);
