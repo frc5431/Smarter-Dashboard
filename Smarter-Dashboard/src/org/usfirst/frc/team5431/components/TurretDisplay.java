@@ -59,6 +59,15 @@ public class TurretDisplay {
 		intakemax.setVisible(true);
 		intakemax.setToolTipText("Intake Max");
 		f.add(intakemax);
+		
+		final JLabel PSItitle = new JLabel("Tank PSI");
+		PSItitle.setBounds(1217, 400, 150, 50);
+		f.add(PSItitle);
+		final JProgressBar psi = new JProgressBar(0,60);
+		psi.setBounds(1417, 400, 500, 50);
+		psi.setVisible(true);
+		psi.setToolTipText("Intake Max");
+		f.add(psi);
 
 		final JProgressBar overdrive = new JProgressBar(75, 100);
 		overdrive.setBounds(1217, 550, 700, 50);//2160 1660
@@ -179,6 +188,10 @@ public class TurretDisplay {
 
 					//SmarterDashboard.table.putNumber("turret max", (double) turretmax.getValue());
 					SmarterDashboard.table.putNumber("intake max", (double) intakemax.getValue());
+					
+					final double pressure = SmarterDashboard.table.getNumber("PRESSURE",0.0);
+					psi.setString(pressure+" PSI");
+					psi.setValue((int)(pressure*10.0));
 					
 					debug.setText("Hole #: " + SmarterDashboard.table.getNumber("HOLE-NUM", 0.0)
 							+ System.lineSeparator() + "Hole area:" + SmarterDashboard.table.getNumber("HOLE-AREA", 0.0)
