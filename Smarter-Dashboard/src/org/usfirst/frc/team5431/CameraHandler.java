@@ -14,7 +14,7 @@ public class CameraHandler {
 
 	static {
 		try {
-		    IpCamDeviceRegistry.register(new IpCamDevice("AXIS M1004-W Network Camera", new URL("http://10.54.31.59/mjpg/video.mjpg"), IpCamMode.PUSH));
+		    IpCamDeviceRegistry.register(new IpCamDevice("AXIS M1004-W Network Camera", new URL("http://axis-camera.local/mjpg/video.mjpg"), IpCamMode.PUSH));
 			Webcam.setDriver(new IpCamDriver());
 		} catch (Throwable t) {
 			t.printStackTrace();

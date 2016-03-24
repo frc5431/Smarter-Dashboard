@@ -31,7 +31,7 @@ public class RobotDashboard {
 		// shooting.setVisible(true);
 
 		final JFrame frame = new JFrame("Team 5431 - Smarter Dashboard");
-		frame.setSize(2160, 784);
+		frame.setSize(1925, 784);
 		frame.setIconImage(ResourceHandler.getResource("logo").getImage());
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,8 +43,6 @@ public class RobotDashboard {
 		error.setBounds(750, 700, 1410, 50);
 		error.setOpaque(true);
 		frame.add(error);
-
-//		SmarterDashboard.init();
 
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
