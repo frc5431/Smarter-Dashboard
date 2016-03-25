@@ -59,7 +59,7 @@ public class CameraDashboard {
 
 			private void action() {
 				try{
-				sleep(1);
+				sleep(250);
 				frame.repaint();
 				CameraHandler.refreshImage();
 				}catch(Exception e){
