@@ -13,6 +13,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import org.usfirst.frc.team5431.components.RobotDisplay;
 import org.usfirst.frc.team5431.components.TurretDisplay;
+import org.usfirst.frc.team5431.components.USBCameraViewer;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -58,6 +59,7 @@ public class RobotDashboard {
 					sleep(100);
 					error.setText(SmarterDashboard.table.getString("ERROR", "No error"));
 					SmarterDashboard.updateConnectionStatus(false);
+					frame.repaint();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -67,8 +69,9 @@ public class RobotDashboard {
 		// new AxisCameraViewer(turret,exe);
 		// new LEDShower(shooting, exe);
 		// new MotorSettingser(settings,exe);
-		new TurretDisplay(frame, exe);
-		new RobotDisplay(frame,exe);
+//		new TurretDisplay(frame, exe);
+//		new RobotDisplay(frame,exe);
+		frame.add(new USBCameraViewer());
 		// new AxisCameraViewer(turret,exe);
 		// });
 
