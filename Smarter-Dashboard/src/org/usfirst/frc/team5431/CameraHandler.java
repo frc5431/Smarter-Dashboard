@@ -14,21 +14,24 @@ public class CameraHandler {
 
 	static {
 		try {
-		    IpCamDeviceRegistry.register(new IpCamDevice("AXIS M1004-W Network Camera", new URL("http://axis-camera.local/mjpg/video.mjpg"), IpCamMode.PUSH));
+			IpCamDeviceRegistry.register(new IpCamDevice("AXIS M1004-W Network Camera",
+					new URL("http://axis-camera.local/mjpg/video.mjpg"), IpCamMode.PUSH));
 			Webcam.setDriver(new IpCamDriver());
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 	}
-	
+
 	private static BufferedImage img;
-	
-	public static void refreshImage(){
-		while(cam==null)initCamera();
-		img =cam.getImage();
+
+	public static void refreshImage() {
+		while (cam == null) {
+			initCamera();
+		}
+		img = cam.getImage();
 	}
-	
-	public static BufferedImage getImage(){
+
+	public static BufferedImage getImage() {
 		return img;
 	}
 
@@ -48,4 +51,6 @@ public class CameraHandler {
 		}
 		return cam;
 	}
+
+	private static native int[] visionProc(byte[] imagedata, int width, int height);
 }
