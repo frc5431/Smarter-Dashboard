@@ -126,7 +126,7 @@ public class MotorRPM {
 								rightspeed = (int) SmarterDashboard.table.getNumber("FLY-LEFT", 0.0);
 
 						final double autospeed = SmarterDashboard.table.getNumber("AUTO-AIM-SPEED", 0.0);
-						final double volts = SmarterDashboard.table.getNumber("POWER");
+						final double volts = SmarterDashboard.table.getNumber("POWER",0.0);
 						aimleftspeed.setValue((int)(autospeed*100.0));
 						aimrightspeed.setValue((int)(autospeed*100.0));
 						aimleftspeed.setString(autospeed + " RPM");
