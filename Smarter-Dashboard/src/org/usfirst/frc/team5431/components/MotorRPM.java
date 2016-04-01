@@ -55,14 +55,34 @@ public class MotorRPM {
 		aimrightspeed.setBounds(1417, 150, 500, 50);
 		aimrightspeed.setVisible(true);
 		f.add(aimrightspeed);
+		
+		final JLabel shooterlefttitle = new JLabel("Power");
+		shooterlefttitle.setBounds(p.x, p.y + 50, 200, 50);
+		shooterlefttitle.setVisible(true);
+		f.add(shooterlefttitle);
+		final JProgressBar shooterleftspeed = new JProgressBar(0, 100);
+		shooterleftspeed.setBounds(p.x + 200, p.y + 50, 500, 50);
+		shooterleftspeed.setVisible(true);
+		f.add(shooterleftspeed);
+
+		final JLabel shooterrighttitle = new JLabel("Power");
+		shooterrighttitle.setBounds(1217, 150, 200, 50);
+		shooterrighttitle.setVisible(true);
+		f.add(shooterrighttitle);
+		final JProgressBar shooterrightspeed = new JProgressBar(0, 100);
+		shooterrightspeed.setBounds(1417, 150, 500, 50);
+		shooterrightspeed.setVisible(true);
+		f.add(shooterrightspeed);
 		final Color defaultcolor = aimleftspeed.getForeground();
 
 		seperate = seperated;
 		if (seperate) {
 			flyleftspeed.setBounds(0, p.y, 500, 50);
 			flylefttitle.setBounds(500, p.y, 200, 50);
-			aimleftspeed.setBounds(0, p.y + 50, 500, 50);
-			aimlefttitle.setBounds(500, p.y + 50, 200, 50);
+			aimleftspeed.setBounds(0, p.y - 50, 500, 50);
+			aimlefttitle.setBounds(500, p.y - 50, 200, 50);
+			shooterleftspeed.setBounds(0, p.y + 50, 500, 50);
+			shooterlefttitle.setBounds(500, p.y + 50, 200, 50);
 		}
 		f.addComponentListener(new ComponentListener() {
 
@@ -72,8 +92,10 @@ public class MotorRPM {
 					final Dimension size = flyrightspeed.getParent().getSize();
 					flyrightspeed.setBounds(size.width - 500, p.y, 500, 50);
 					flyrighttitle.setBounds(size.width - 700, p.y, 200, 50);
-					aimrightspeed.setBounds(size.width - 500, p.y + 50, 500, 50);
-					aimrighttitle.setBounds(size.width - 700, p.y + 50, 200, 50);
+					aimrightspeed.setBounds(size.width - 500, p.y - 50, 500, 50);
+					aimrighttitle.setBounds(size.width - 700, p.y - 50, 200, 50);
+					shooterrightspeed.setBounds(size.width - 500, p.y + 50, 500, 50);
+					shooterrighttitle.setBounds(size.width - 700, p.y + 50, 200, 50);
 				}
 			}
 
@@ -104,10 +126,14 @@ public class MotorRPM {
 								rightspeed = (int) SmarterDashboard.table.getNumber("FLY-LEFT", 0.0);
 
 						final double autospeed = SmarterDashboard.table.getNumber("AUTO-AIM-SPEED", 0.0);
-						aimleftspeed.setValue(leftspeed);
-						aimrightspeed.setValue(rightspeed);
-						aimleftspeed.setString(leftspeed + " RPM");
-						aimrightspeed.setString(rightspeed + " RPM");
+						final double volts = SmarterDashboard.table.getNumber("POWER");
+						aimleftspeed.setValue((int)(autospeed*100.0));
+						aimrightspeed.setValue((int)(autospeed*100.0));
+						aimleftspeed.setString(autospeed + " RPM");
+						aimrightspeed.setString(autospeed + " RPM");
+						
+						shooterrightspeed.setValue((int)(volts*100.0));
+						shooterleftspeed.setValue((int)(volts*100.0));
 
 						flyleftspeed.setValue(leftspeed);
 						flyleftspeed.setString(leftspeed + " RPM");
