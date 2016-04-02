@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5431;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -9,6 +11,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.concurrent.Executor;
+
 import javax.imageio.ImageIO;
 
 import com.github.sarxos.webcam.Webcam;
@@ -18,30 +22,19 @@ import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
 import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
 
 public class CameraHandler {
-	private static Webcam cam;
-
-	static {
-		try {
-			IpCamDeviceRegistry.register(new IpCamDevice("AXIS M1004-W Network Camera",
-					new URL("http://axis-camera.local/mjpg/video.mjpg"), IpCamMode.PUSH));
-			Webcam.setDriver(new IpCamDriver());
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-	}
 
 	private static volatile BufferedImage img;
 	
 	public static void refreshImage(){
-		while(cam==null)initCamera();
-		img =cam.getImage();
+		//while(cam==null)initCamera();
+		//img =cam.getImage();
 	}
 	
     /**
      * Return an array big enough to hold least at least "capacity" elements.  If the supplied buffer is big enough,
      * it will be reused to avoid unnecessary allocations.
      */
-    private static byte[] growIfNecessary(byte[] buffer, int capacity) {
+    private static byte[] growIfNecessary(final byte[] buffer,final  int capacity) {
         if (capacity > buffer.length) {
             int newCapacity = buffer.length;
             while (newCapacity < capacity) {
@@ -67,32 +60,40 @@ public class CameraHandler {
         // iteration when the thread is interrupted or an exception happens.
         while (!shutdownThread) {
             try {
-                try (Socket socket = new Socket(InetAddress.getLocalHost(), PORT);
+                try (Socket socket = new Socket(InetAddress.getLoopbackAddress(), PORT);
                      DataInputStream inputStream = new DataInputStream(socket.getInputStream());
                      DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream())) {
-
-
+                	
                     // In the FRC dashboard protocol, the client (us) starts out by sending three 32-bit integers
                     // (FPS, compression level, and a size enum).  FPS is the only one actually recognized by
                     // GRIP.
                     outputStream.writeInt(30);
                     outputStream.writeInt(HW_COMPRESSION);
                     outputStream.writeInt(SIZE_640x480);
+                    long starttime = System.currentTimeMillis();
+                    int fps = 0;
 
                     while (!Thread.currentThread().isInterrupted()) {
                         // Each frame in the FRC dashboard image protocol starts with a 4 magic numbers.  If we
                         // don't get those four numbers, something's wrong.
-                        inputStream.readFully(magic);
+
+                    	inputStream.readFully(magic);
                         if (!Arrays.equals(magic, MAGIC_NUMBERS)) {
                             throw new IOException("Invalid stream (wrong magic numbers)");
                         }
 
                         // Next, the server sends a 32-bit number indicating the number of bytes in this frame,
                         // then the raw bytes.
-                        int imageSize = inputStream.readInt();
+                        final int imageSize = inputStream.readInt();
                         imageBuffer = growIfNecessary(imageBuffer, imageSize);
                         inputStream.readFully(imageBuffer, 0, imageSize);
 
+                        fps++;
+                        if(System.currentTimeMillis()>starttime+1000){
+                        	starttime=System.currentTimeMillis();
+                        	fps=0;
+                        }
+                        
                         // Decode the image and redraw
                         img = ImageIO.read(new ByteArrayInputStream(imageBuffer, 0, imageSize));
                     }
@@ -101,7 +102,7 @@ public class CameraHandler {
                 } finally {
                     Thread.sleep(1000); // Wait a second before trying again
                 }
-            } catch (InterruptedException e) {
+            } catch (Throwable e) {
                 // The main thread will interrupt the capture thread to indicate that properties have changed, or
                 // possibly that the thread should shut down.
                 e.printStackTrace();
@@ -113,21 +114,12 @@ public class CameraHandler {
 		return img;
 	}
 
-	public static void initCamera() {
+	public static void initCamera(Executor exe) {
 		try {
-			cam = Webcam.getDefault();
-			System.out.println(cam.getName());
-			//thread.run();
+			exe.execute(thread);;;
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 
-	}
-
-	public static Webcam getCamera() {
-		while (cam == null) {
-			initCamera();
-		}
-		return cam;
 	}
 }

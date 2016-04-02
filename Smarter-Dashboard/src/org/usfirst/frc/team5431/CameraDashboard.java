@@ -55,6 +55,8 @@ public class CameraDashboard {
 		});
 		autochooser.setBounds(0,650,300,50);
 		frame.add(autochooser);
+		
+		CameraHandler.initCamera(exe);
 			
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
@@ -67,10 +69,9 @@ public class CameraDashboard {
 
 			private void action() {
 				try{
-				sleep(250);
+				sleep(66);
 				frame.repaint();
 				SmarterDashboard.table.putString("AUTO-SELECTED", (String)autochooser.getSelectedItem());
-				CameraHandler.refreshImage();
 				}catch(Exception e){
 					e.printStackTrace();
 				}

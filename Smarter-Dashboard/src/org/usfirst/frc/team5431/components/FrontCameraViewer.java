@@ -18,6 +18,10 @@ import com.github.sarxos.webcam.WebcamException;
 import com.github.sarxos.webcam.WebcamPanel;
 
 public class FrontCameraViewer extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	final Rectangle r = new Rectangle(0, 0, 2160, 1080);
 	Dimension windowsize;
 
@@ -26,7 +30,6 @@ public class FrontCameraViewer extends JPanel {
 	public FrontCameraViewer(Dimension windowsize, JFrame f) {
 		try {
 			setBounds(r);
-			f.add(new WebcamPanel(CameraHandler.getCamera()));
 			l.setBounds(r);
 			f.add(l);
 			this.windowsize = windowsize;
@@ -43,7 +46,6 @@ public class FrontCameraViewer extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		try {
-			g.setFont(f);
 			final Rectangle bounds = getParent().getBounds();
 			try {
 				fps++;
@@ -53,21 +55,20 @@ public class FrontCameraViewer extends JPanel {
 					startTime = System.currentTimeMillis();
 				}
 
-				final Webcam cam = CameraHandler.getCamera();
-				if (cam == null) {
-					throw new IOException("Cam not open");
-				}
+//				final Webcam cam = CameraHandler.getCamera();
+//				if (cam == null) {
+//					throw new IOException("Cam not open");
+//				}
 				final BufferedImage img = CameraHandler.getImage();
 				if (img == null) {
 					throw new IOException("Image is null!");
 				}
 				g.drawImage(img, 0, 0, bounds.width, bounds.height, null);
-				g.setColor(Color.WHITE);
-				final Dimension viewsize = cam.getViewSize();
-				g.drawString(cam.getName() + " recording at " + cam.getFPS() + " FPS (" + outfps + " UPS) at "
-						+ viewsize.width + "x" + viewsize.height, 0, 16);
+//				final Dimension viewsize = cam.getViewSize();
+//				g.drawString(cam.getName() + " recording at " + cam.getFPS() + " FPS (" + outfps + " UPS) at "
+//						+ viewsize.width + "x" + viewsize.height, 0, 16);
 				g.dispose();
-			} catch (IOException | WebcamException e) {
+			} catch (Exception e) {
 				g.setColor(Color.RED);
 				g.fillRect(0, 0, r.width, r.height);
 				g.setColor(Color.WHITE);
