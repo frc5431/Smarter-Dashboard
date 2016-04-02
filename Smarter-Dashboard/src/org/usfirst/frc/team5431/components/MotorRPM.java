@@ -122,8 +122,8 @@ public class MotorRPM {
 				try {
 					while (true) {
 						sleep(1);
-						final int rightspeed = (int) SmarterDashboard.table.getNumber("FLY-RIGHT", 0.0), 
-								leftspeed = (int) SmarterDashboard.table.getNumber("FLY-LEFT", 0.0);
+						final int leftspeed = (int) SmarterDashboard.table.getNumber("FLY-RIGHT", 0.0),//encoders are reversed 
+								rightspeed = (int) SmarterDashboard.table.getNumber("FLY-LEFT", 0.0);
 
 						final double autospeed = SmarterDashboard.table.getNumber("AUTO-AIM-SPEED", 0.0);
 						final double volts = SmarterDashboard.table.getNumber("POWER",0.0);
