@@ -10,6 +10,10 @@ import java.util.concurrent.Executor;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
 
 import org.usfirst.frc.team5431.SmarterDashboard;
 
@@ -77,6 +81,10 @@ public class MotorRPM {
 		shooterrightspeed.setVisible(true);
 		shooterrightspeed.setStringPainted(true);
 		f.add(shooterrightspeed);
+		
+		final JSpinner speed = new JSpinner(new SpinnerNumberModel(0, 0, 4500, 100)) ;
+		speed.setBounds(0, 900, 100, 50);
+		//f.add(speed);
 
 		seperate = seperated;
 		if (seperate) {
@@ -127,19 +135,22 @@ public class MotorRPM {
 
 						final double autospeed = SmarterDashboard.table.getNumber("AUTO-AIM-SPEED", 0.0);
 						final double volts = SmarterDashboard.table.getNumber("POWER",0.0);
-						aimleftspeed.setValue((int)(autospeed*100.0));
-						aimrightspeed.setValue((int)(autospeed*100.0));
+						aimleftspeed.setValue((int)(autospeed));
+						aimrightspeed.setValue((int)(autospeed));
 						aimleftspeed.setString(autospeed + " RPM");
 						aimrightspeed.setString(autospeed + " RPM");
 						
 						shooterrightspeed.setValue((int)(volts*100.0));
 						shooterleftspeed.setValue((int)(volts*100.0));
+						shooterleftspeed.setString((int)(volts*4500.0)+" RPM ("+volts+"%)");
+						shooterrightspeed.setString((int)(volts*4500.0)+" RPM ("+volts+"%)");
 
 						flyleftspeed.setValue(leftspeed);
 						flyleftspeed.setString(leftspeed + " RPM");
 						flyrightspeed.setValue(rightspeed);
 						flyrightspeed.setString(rightspeed + " RPM");
 
+						SmarterDashboard.table.putNumber("MANUAL-SPEED",(int)speed.getValue());
 					}
 				} catch (Throwable t) {
 					t.printStackTrace();
