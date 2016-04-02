@@ -44,7 +44,6 @@ public class SmarterDashboard {
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");
 		table = NetworkTable.getTable("5431");
-
 			try {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException

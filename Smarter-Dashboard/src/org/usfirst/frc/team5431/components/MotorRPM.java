@@ -42,7 +42,7 @@ public class MotorRPM {
 		aimlefttitle.setBounds(p.x, p.y + 50, 200, 50);
 		aimlefttitle.setVisible(true);
 		f.add(aimlefttitle);
-		final JProgressBar aimleftspeed = new JProgressBar(0, 100);
+		final JProgressBar aimleftspeed = new JProgressBar(0, 4500);
 		aimleftspeed.setBounds(p.x + 200, p.y + 50, 500, 50);
 		aimleftspeed.setVisible(true);
 		aimleftspeed.setStringPainted(true);
@@ -52,7 +52,7 @@ public class MotorRPM {
 		aimrighttitle.setBounds(1217, 150, 200, 50);
 		aimrighttitle.setVisible(true);
 		f.add(aimrighttitle);
-		final JProgressBar aimrightspeed = new JProgressBar(0, 100);
+		final JProgressBar aimrightspeed = new JProgressBar(0, 4500);
 		aimrightspeed.setBounds(1417, 150, 500, 50);
 		aimrightspeed.setVisible(true);
 		aimrightspeed.setStringPainted(true);
