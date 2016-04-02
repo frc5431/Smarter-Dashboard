@@ -45,6 +45,7 @@ public class MotorRPM {
 		final JProgressBar aimleftspeed = new JProgressBar(0, 100);
 		aimleftspeed.setBounds(p.x + 200, p.y + 50, 500, 50);
 		aimleftspeed.setVisible(true);
+		aimleftspeed.setStringPainted(true);
 		f.add(aimleftspeed);
 
 		final JLabel aimrighttitle = new JLabel("Calculated Speed");
@@ -54,6 +55,7 @@ public class MotorRPM {
 		final JProgressBar aimrightspeed = new JProgressBar(0, 100);
 		aimrightspeed.setBounds(1417, 150, 500, 50);
 		aimrightspeed.setVisible(true);
+		aimrightspeed.setStringPainted(true);
 		f.add(aimrightspeed);
 		
 		final JLabel shooterlefttitle = new JLabel("Power");
@@ -63,6 +65,7 @@ public class MotorRPM {
 		final JProgressBar shooterleftspeed = new JProgressBar(0, 100);
 		shooterleftspeed.setBounds(p.x + 200, p.y + 50, 500, 50);
 		shooterleftspeed.setVisible(true);
+		shooterleftspeed.setStringPainted(true);
 		f.add(shooterleftspeed);
 
 		final JLabel shooterrighttitle = new JLabel("Power");
@@ -72,8 +75,8 @@ public class MotorRPM {
 		final JProgressBar shooterrightspeed = new JProgressBar(0, 100);
 		shooterrightspeed.setBounds(1417, 150, 500, 50);
 		shooterrightspeed.setVisible(true);
+		shooterrightspeed.setStringPainted(true);
 		f.add(shooterrightspeed);
-		final Color defaultcolor = aimleftspeed.getForeground();
 
 		seperate = seperated;
 		if (seperate) {
@@ -119,11 +122,8 @@ public class MotorRPM {
 				try {
 					while (true) {
 						sleep(1);
-						final int leftspeed = (int) SmarterDashboard.table.getNumber("FLY-RIGHT", 0.0), // the
-																										// encoders
-																										// are
-																										// reversed
-								rightspeed = (int) SmarterDashboard.table.getNumber("FLY-LEFT", 0.0);
+						final int rightspeed = (int) SmarterDashboard.table.getNumber("FLY-RIGHT", 0.0), 
+								leftspeed = (int) SmarterDashboard.table.getNumber("FLY-LEFT", 0.0);
 
 						final double autospeed = SmarterDashboard.table.getNumber("AUTO-AIM-SPEED", 0.0);
 						final double volts = SmarterDashboard.table.getNumber("POWER",0.0);

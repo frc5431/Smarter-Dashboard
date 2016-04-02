@@ -34,7 +34,7 @@ public class CameraHandler {
 	
 	public static void refreshImage(){
 		while(cam==null)initCamera();
-		//img =cam.getImage();
+		img =cam.getImage();
 	}
 	
     /**
@@ -117,7 +117,7 @@ public class CameraHandler {
 		try {
 			cam = Webcam.getDefault();
 			System.out.println(cam.getName());
-			thread.run();
+			//thread.run();
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
@@ -130,6 +130,4 @@ public class CameraHandler {
 		}
 		return cam;
 	}
-
-	private static native int[] visionProc(byte[] imagedata, int width, int height);
 }
