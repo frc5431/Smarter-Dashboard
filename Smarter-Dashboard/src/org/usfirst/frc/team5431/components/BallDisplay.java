@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
+import org.usfirst.frc.team5431.ResourceHandler;
 import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class BallDisplay extends JPanel{
@@ -37,5 +38,20 @@ public class BallDisplay extends JPanel{
 		g.fillRect(0,0, size.width, 50);
 		g.setColor(Color.BLACK);
 		g.drawString((ball ? "BALL IN" : "BALL OUT")+"| Tower Distance: "+SmarterDashboard.table.getNumber("HOLE-DISTANCE",0), size.width/2-50, 25);//the meaning to everything
+		final boolean isIntaking = SmarterDashboard.table.getBoolean("intake", false);
+		
+		//if (isIntaking&&SmarterDashboard.table.getBoolean("INTAKE-REVERSE", false)) {
+		
+//	} else 
+		
+		if(isIntaking){
+			g.setColor(Color.green);
+		}else{
+			g.setColor(Color.red);
+		}
+		g.fillRect(0,50, size.width, 50);
+		g.setColor(Color.BLACK);
+		g.drawString((isIntaking ? "INTAKING" : "NOT INTAKING"), size.width/2-50, 75);//the meaning to everything
+		
 	}
 }

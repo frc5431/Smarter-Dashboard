@@ -96,7 +96,7 @@ public class TurretDisplay {
 		aimtitle.setBounds(1217, 150, 200, 50);
 		aimtitle.setVisible(true);
 		f.add(aimtitle);
-		final JProgressBar aimspeed = new JProgressBar(0, 100);
+		final JProgressBar aimspeed = new JProgressBar(0, 4500);
 		aimspeed.setBounds(1417, 150, 500, 50);
 		aimspeed.setStringPainted(true);
 		aimspeed.setVisible(true);
@@ -203,13 +203,13 @@ public class TurretDisplay {
 					
 
 					final double autospeed = SmarterDashboard.table.getNumber("AUTO-AIM-SPEED", 0.0);
-					aimtitle.setText("Calculated Flywheel Speed: " + autospeed);
+					aimtitle.setText("Calculated Flywheel RPM: " + autospeed);
 					if(autospeed>1.0){
 						aimspeed.setForeground(Color.RED);
 					}else{
 						aimspeed.setForeground(defaultcolor);
 					}
-					aimspeed.setValue((int) (autospeed * 100.0));
+					aimspeed.setValue((int) (autospeed));
 					final double distance = SmarterDashboard.table.getNumber("HOLE-DISTANCE", 0);
 					if (distance < 90) {
 						distancebar.setForeground(Color.GREEN);

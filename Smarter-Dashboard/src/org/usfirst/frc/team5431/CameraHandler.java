@@ -9,8 +9,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.logging.Level;
-
 import javax.imageio.ImageIO;
 
 import com.github.sarxos.webcam.Webcam;
@@ -24,14 +22,15 @@ public class CameraHandler {
 
 	static {
 		try {
-		    IpCamDeviceRegistry.register(new IpCamDevice("AXIS M1004-W Network Camera", new URL("http://axis-camera.local/mjpg/video.mjpg"), IpCamMode.PUSH));
+			IpCamDeviceRegistry.register(new IpCamDevice("AXIS M1004-W Network Camera",
+					new URL("http://axis-camera.local/mjpg/video.mjpg"), IpCamMode.PUSH));
 			Webcam.setDriver(new IpCamDriver());
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 	}
-	
-	private static BufferedImage img;
+
+	private static volatile BufferedImage img;
 	
 	public static void refreshImage(){
 		while(cam==null)initCamera();
@@ -131,4 +130,6 @@ public class CameraHandler {
 		}
 		return cam;
 	}
+
+	private static native int[] visionProc(byte[] imagedata, int width, int height);
 }

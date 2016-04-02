@@ -48,7 +48,7 @@ public class DriverDashboard {
 
 			private void action() {
 				try {
-					sleep(1);
+					sleep(250);
 					frame.repaint();
 				} catch (Exception e) {
 					e.printStackTrace();

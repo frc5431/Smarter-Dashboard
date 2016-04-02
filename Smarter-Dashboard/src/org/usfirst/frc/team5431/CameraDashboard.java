@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -47,6 +48,13 @@ public class CameraDashboard {
 		frame.setVisible(true);
 		
 		new MotorRPM(new Point(0,500),true, frame,exe);
+		
+	
+		final JComboBox<?> autochooser = new JComboBox<Object>(new String[]{
+				"RockWall", "Moat", "TouchOuterWork", "Lowbar", "AutoShoot", "StandStill", "CrossOuter", "Spybox", "RockwallShoot", "RoughTerrain"
+		});
+		autochooser.setBounds(0,650,300,50);
+		frame.add(autochooser);
 			
 		// connection thread, updates once per second
 		exe.execute(new Thread() {
@@ -59,8 +67,9 @@ public class CameraDashboard {
 
 			private void action() {
 				try{
-				sleep(1);
+				sleep(250);
 				frame.repaint();
+				SmarterDashboard.table.putString("AUTO-SELECTED", (String)autochooser.getSelectedItem());
 				CameraHandler.refreshImage();
 				}catch(Exception e){
 					e.printStackTrace();

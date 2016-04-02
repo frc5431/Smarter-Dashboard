@@ -1,32 +1,26 @@
 package org.usfirst.frc.team5431.components;
 
-import java.awt.Color;
 import java.awt.Rectangle;
 import java.io.File;
 import java.util.concurrent.Executor;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JProgressBar;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SpinnerModel;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingConstants;
+import javax.swing.JPanel;
 
 import org.usfirst.frc.team5431.ResourceHandler;
 import org.usfirst.frc.team5431.SmarterDashboard;
 
-public class RobotDisplay {
+public class RobotDisplay extends JPanel {
 	// AUTO-AIM-ON - whether it is auto aiming PUT
 	//
-	
+
 	public RobotDisplay(JFrame f, Executor exe) {
 
-		final Rectangle bounds = new Rectangle(0, 0, 750, 750); //the stuff needs to be 750 and 750
+		final Rectangle bounds = new Rectangle(0, 0, 750, 750); // the stuff
+																// needs to be
+																// 750 and 750
 
 		final JLabel aimright = new JLabel();
 		aimright.setVisible(true);
@@ -90,9 +84,9 @@ public class RobotDisplay {
 		robot.setBounds(bounds);
 		robot.setIcon(ResourceHandler.getResource("robot off"));
 		f.add(robot);
-		
+
 		final Chopper choppers = new Chopper();
-		choppers.setBounds(new Rectangle(800,0,250,250));
+		choppers.setBounds(new Rectangle(800, 0, 250, 250));
 		f.add(choppers);
 
 		// final JProgressBar leftwheel = new
@@ -118,8 +112,7 @@ public class RobotDisplay {
 
 			@Override
 			public void run() {
-				while(true)
-				{
+				while (true) {
 					action();
 				}
 			}
@@ -133,8 +126,7 @@ public class RobotDisplay {
 					if (SmarterDashboard.table.getBoolean("INTAKE-REVERSE", false)) {
 						intake.setIcon(ResourceHandler.getResource("intake reverse"));
 					} else {
-						intake.setIcon(
-								ResourceHandler.getResource("intake on"));
+						intake.setIcon(ResourceHandler.getResource("intake on"));
 					}
 
 					final boolean isTurreting = SmarterDashboard.table.getBoolean("turret", false);
@@ -150,12 +142,10 @@ public class RobotDisplay {
 						driveleft.setVisible(true);
 					}
 					if (leftvalue < 0) {
-						driveleft.setIcon(
-								ResourceHandler.getResource("left backward"));
+						driveleft.setIcon(ResourceHandler.getResource("left backward"));
 					}
 					if (leftvalue > 0) {
-						driveleft.setIcon(
-								ResourceHandler.getResource("left forward"));
+						driveleft.setIcon(ResourceHandler.getResource("left forward"));
 					}
 
 					final double rightvalue = -SmarterDashboard.table.getNumber("RIGHT-DRIVE", 0.0);
@@ -168,8 +158,7 @@ public class RobotDisplay {
 						driveright.setIcon(ResourceHandler.getResource("right backward"));
 					}
 					if (rightvalue > 0) {
-						driveright.setIcon(
-								ResourceHandler.getResource("right forward"));
+						driveright.setIcon(ResourceHandler.getResource("right forward"));
 					}
 
 					// leftwheel.setValue((int)
@@ -181,18 +170,6 @@ public class RobotDisplay {
 
 					ball.setVisible(SmarterDashboard.table.getBoolean("boulder", false));
 
-					if (SmarterDashboard.table.getBoolean("AUTO", false)) {
-						robot.setIcon(
-								ResourceHandler.getResource("robot_auto"));
-					} else if (!SmarterDashboard.table.getBoolean("ENABLED", false)) {
-						robot.setIcon(
-								ResourceHandler.getResource("robot off"));
-
-					} else {
-						robot.setIcon(ResourceHandler.getResource("robot"));
-					}
-
-					
 					// aimassist
 					final String driveval = SmarterDashboard.table.getString("PULL", "NA");
 					final String turnval = SmarterDashboard.table.getString("FIRE", "NA");

@@ -36,8 +36,8 @@ public class SmarterDashboard {
 
 	public static void main(String... args){		
 		CameraDashboard.main(null);
-		DriverDashboard.main(null);
-		RobotDashboard.main(null);
+		//DriverDashboard.main(null);
+		//RobotDashboard.main(null);
 	}
 	
 	static{
