@@ -37,7 +37,7 @@ public class BallDisplay extends JPanel{
 		g.setFont(f);
 		g.fillRect(0,0, size.width, 50);
 		g.setColor(Color.BLACK);
-		g.drawString((ball ? "BALL IN" : "BALL OUT")+"| Tower Distance: "+SmarterDashboard.table.getNumber("HOLE-DISTANCE",0), size.width/2-50, 25);//the meaning to everything
+		g.drawString((ball ? "BALL IN" : "BALL OUT")+"| Tower Distance: "+(int)SmarterDashboard.table.getNumber("HOLE-DISTANCE",0), size.width/2-50, 25);//the meaning to everything
 		final boolean isIntaking = SmarterDashboard.table.getBoolean("intake", false);
 		
 		//if (isIntaking&&SmarterDashboard.table.getBoolean("INTAKE-REVERSE", false)) {

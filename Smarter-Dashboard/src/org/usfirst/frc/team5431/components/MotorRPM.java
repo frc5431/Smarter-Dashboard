@@ -2,6 +2,7 @@ package org.usfirst.frc.team5431.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -18,6 +19,8 @@ import javax.swing.event.ChangeListener;
 import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class MotorRPM {
+	
+	private final static Font font = new Font(Font.DIALOG,Font.PLAIN,32);
 
 	private final boolean seperate;
 
@@ -86,12 +89,19 @@ public class MotorRPM {
 		speed.setBounds(0, 900, 100, 50);
 		//f.add(speed);
 
+		aimrightspeed.setFont(font);
+		aimleftspeed.setFont(font);
+		shooterleftspeed.setFont(font);
+		shooterrightspeed.setFont(font);
+		flyleftspeed.setFont(font);
+		flyrightspeed.setFont(font);
+		
 		seperate = seperated;
 		if (seperate) {
 			flyleftspeed.setBounds(0, p.y, 500, 50);
 			flylefttitle.setBounds(500, p.y, 200, 50);
-			aimleftspeed.setBounds(0, p.y - 50, 500, 50);
-			aimlefttitle.setBounds(500, p.y - 50, 200, 50);
+			aimleftspeed.setBounds(0, p.y +100, 500, 50);
+			aimlefttitle.setBounds(500, p.y +100, 200, 50);
 			shooterleftspeed.setBounds(0, p.y + 50, 500, 50);
 			shooterlefttitle.setBounds(500, p.y + 50, 200, 50);
 		}
@@ -103,8 +113,8 @@ public class MotorRPM {
 					final Dimension size = flyrightspeed.getParent().getSize();
 					flyrightspeed.setBounds(size.width - 500, p.y, 500, 50);
 					flyrighttitle.setBounds(size.width - 700, p.y, 200, 50);
-					aimrightspeed.setBounds(size.width - 500, p.y - 50, 500, 50);
-					aimrighttitle.setBounds(size.width - 700, p.y - 50, 200, 50);
+					aimrightspeed.setBounds(size.width - 500, p.y +100, 500, 50);
+					aimrighttitle.setBounds(size.width - 700, p.y +100, 200, 50);
 					shooterrightspeed.setBounds(size.width - 500, p.y + 50, 500, 50);
 					shooterrighttitle.setBounds(size.width - 700, p.y + 50, 200, 50);
 				}
@@ -134,23 +144,23 @@ public class MotorRPM {
 								rightspeed = (int) SmarterDashboard.table.getNumber("FLY-LEFT", 0.0);
 
 						final double autospeed = SmarterDashboard.table.getNumber("AUTO-AIM-SPEED", 0.0);
-						final double volts = SmarterDashboard.table.getNumber("POWER",0.0);
+						final double volts = SmarterDashboard.table.getNumber("POWER",0.0)/4500.0;
 						aimleftspeed.setValue((int)(autospeed));
 						aimrightspeed.setValue((int)(autospeed));
-						aimleftspeed.setString(autospeed + " RPM");
-						aimrightspeed.setString(autospeed + " RPM");
+						aimleftspeed.setString((int)autospeed + "");
+						aimrightspeed.setString((int)autospeed + "");
 						
 						shooterrightspeed.setValue((int)(volts*100.0));
 						shooterleftspeed.setValue((int)(volts*100.0));
-						shooterleftspeed.setString((int)(volts*4500.0)+" RPM ("+volts+"%)");
-						shooterrightspeed.setString((int)(volts*4500.0)+" RPM ("+volts+"%)");
+						shooterleftspeed.setString((int)(volts*4500.0)+"");
+						shooterrightspeed.setString((int)(volts*4500.0)+"");
 
 						flyleftspeed.setValue(leftspeed);
-						flyleftspeed.setString(leftspeed + " RPM");
+						flyleftspeed.setString(leftspeed + "");
 						flyrightspeed.setValue(rightspeed);
-						flyrightspeed.setString(rightspeed + " RPM");
+						flyrightspeed.setString(rightspeed + "");
 
-						SmarterDashboard.table.putNumber("MANUAL-SPEED",(int)speed.getValue());
+						//SmarterDashboard.table.putNumber("MANUAL-SPEED",(int)speed.getValue());
 					}
 				} catch (Throwable t) {
 					t.printStackTrace();
