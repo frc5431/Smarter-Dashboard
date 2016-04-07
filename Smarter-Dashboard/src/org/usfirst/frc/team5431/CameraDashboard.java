@@ -47,9 +47,7 @@ public class CameraDashboard {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);
-		
-		GRIP.init(exe,frame);
-		
+			
 		new MotorRPM(new Point(0,500),true, frame,exe);
 		
 	

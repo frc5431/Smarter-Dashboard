@@ -43,6 +43,12 @@ public class SmarterDashboard {
 	}
 	
 	static{
+		try {
+			GRIP.init();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");
