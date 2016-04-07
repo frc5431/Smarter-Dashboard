@@ -19,12 +19,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GRIP {
 	private enum GRIP_FILE{
-		ACADEMY(new File("academy.grip").getAbsolutePath());
+		ACADEMY;
 		
 		final String s;
 		
-		GRIP_FILE(String path){
-			s=path;
+		GRIP_FILE(){
+			s=new File(name()+".grip").getAbsolutePath();
 		}
 		
 		private String getPath(){
@@ -36,6 +36,7 @@ public class GRIP {
 		// create grip
 			final JFrame f = new JFrame();
 			f.setBounds(new Rectangle(0,0,200,200));
+			f.setResizable(false);
 			f.setVisible(true);
 			final JComboBox<?> chooser = new JComboBox<GRIP_FILE>(GRIP_FILE.values());
 			chooser.setBounds(new Rectangle(0,0,100,25));
