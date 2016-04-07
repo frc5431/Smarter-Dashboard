@@ -19,7 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GRIP {
 	private enum GRIP_FILE{
-		ACADEMY("C:\\Users\\AcademyHS Robotics\\Desktop\\coding\\at_academy_here.grip");
+		ACADEMY(new File("academy.grip").getAbsolutePath());
 		
 		final String s;
 		
@@ -47,7 +47,7 @@ public class GRIP {
 					try{
 					final GRIP_FILE chosen = (GRIP_FILE) chooser.getSelectedItem();
 					System.out.println("Opening GRIP file " + chosen+"("+chosen.getPath()+")");
-					final ProcessBuilder pb = new ProcessBuilder("grip.exe",
+					final ProcessBuilder pb = new ProcessBuilder("GRIP\\grip.exe",
 							"\"" + chosen.getPath() + "\"").inheritIO();
 //					System.out.println("\"C:" + File.separator + "Users" + File.separator + "AcademyHS Robotics"
 //									+ File.separator + "AppData" + File.separator + "Local" + File.separator
