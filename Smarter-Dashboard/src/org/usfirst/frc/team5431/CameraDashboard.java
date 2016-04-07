@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -29,7 +30,7 @@ public class CameraDashboard {
 	public static boolean recievedMessage = false;
 	private static final Executor exe = Executors.newCachedThreadPool();
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		// final JFrame shooting = new JFrame("Vision - Smarter Dashboard");
 		// shooting.setSize(2160, 1080);
@@ -46,6 +47,8 @@ public class CameraDashboard {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		
+		GRIP.init(exe,frame);
 		
 		new MotorRPM(new Point(0,500),true, frame,exe);
 		

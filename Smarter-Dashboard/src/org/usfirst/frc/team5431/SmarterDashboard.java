@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.usfirst.frc.team5431.components.USBCameraViewer;
 
@@ -34,13 +36,14 @@ public class SmarterDashboard {
 	public static NetworkTable table;
 	public static final int CONNECTION_TPS = 1;
 
-	public static void main(String... args){		
+	public static void main(String... args) throws IOException{		
 		CameraDashboard.main(null);
 		//DriverDashboard.main(null);
 		//RobotDashboard.main(null);
 	}
 	
 	static{
+		
 		NetworkTable.setClientMode();
 		NetworkTable.setIPAddress("roborio-5431-frc.local");
 		table = NetworkTable.getTable("5431");
