@@ -72,7 +72,7 @@ public class FrontCameraViewer extends JPanel {
 				g.setColor(Color.RED);
 				g.fillRect(0, 0, r.width, r.height);
 				g.setColor(Color.WHITE);
-				g.drawString(e.getMessage(), 0, bounds.height/2);
+				g.drawString(e.getMessage(), bounds.width/2, bounds.height/2);
 				g.dispose();
 			}
 		} catch (Throwable e) {
