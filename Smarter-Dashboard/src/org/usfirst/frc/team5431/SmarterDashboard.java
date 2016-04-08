@@ -48,6 +48,8 @@ public class SmarterDashboard {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
+		
+		AutonChooser.create();
 
 		
 		NetworkTable.setClientMode();

@@ -55,7 +55,7 @@ public class CameraDashboard {
 				"CrossRockWallAndStop", "TouchOuterWork", "CrossLowbarAndStop", "CrossLowbarAndShoot", "DoNothing","CrossRockwallAndShoot","CrossMoatAndStop",
 		});
 		autochooser.setBounds(0,650,300,50);
-		frame.add(autochooser);
+		//frame.add(autochooser);
 		
 		CameraHandler.initCamera(exe);
 			
