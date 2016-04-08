@@ -18,9 +18,9 @@ public class TargetingLine extends JPanel{
 	public void paint(Graphics g){
 		final Rectangle bounds = getParent().getBounds();
 		g.setColor(new Color(0,0,0,100));
-		g.fillRect((bounds.width/2)-(25+28), 0, 25, bounds.height);
+		g.fillRect((bounds.width/2)-(25), 0, 25, bounds.height);
 		g.setColor(new Color(255,0,0,100));
-		g.fillRect((bounds.width/2)-28, 0, 25, bounds.height);
+		g.fillRect((bounds.width/2), 0, 25, bounds.height);
 	}
 
 }

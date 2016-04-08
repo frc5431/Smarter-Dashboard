@@ -52,7 +52,7 @@ public class CameraDashboard {
 		
 	
 		final JComboBox<?> autochooser = new JComboBox<Object>(new String[]{
-				"CrossRockWallAndStop", "TouchOuterWork", "CrossLowbarAndStop", "CrossLowbarAndShoot", "DoNothing",
+				"CrossRockWallAndStop", "TouchOuterWork", "CrossLowbarAndStop", "CrossLowbarAndShoot", "DoNothing","CrossRockwallAndShoot","CrossMoatAndStop",
 		});
 		autochooser.setBounds(0,650,300,50);
 		frame.add(autochooser);

@@ -43,11 +43,11 @@ public class SmarterDashboard {
 	}
 	
 	static{
-		try {
-			GRIP.init();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			GRIP.init();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 		
 		NetworkTable.setClientMode();
