@@ -11,47 +11,59 @@ import javax.swing.JPanel;
 import org.usfirst.frc.team5431.ResourceHandler;
 import org.usfirst.frc.team5431.SmarterDashboard;
 
-public class BallDisplay extends JPanel{
+public class BallDisplay extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	public BallDisplay(final Dimension size){
-		setBounds(0,0,size.width,100);
+
+	public BallDisplay(final Dimension size) {
+		setBounds(0, 0, size.width, 100);
 	}
 
-	final static Font f = new Font(Font.DIALOG,Font.PLAIN,25);
+	final static Font f = new Font(Font.DIALOG, Font.PLAIN, 25);
 
 	@Override
-	public void paint(Graphics g){
-		final boolean ball = SmarterDashboard.table.getBoolean("boulder",false);
+	public void paint(Graphics g) {
+		final boolean ball = SmarterDashboard.table.getBoolean("boulder", false);
 		final Dimension size = getParent().getSize();
-		setBounds(new Rectangle(0,0,size.width,size.height));
-		if(ball){
+		setBounds(new Rectangle(0, 0, size.width, size.height));
+		if (ball) {
 			g.setColor(Color.green);
-		}else{
+		} else {
 			g.setColor(Color.red);
 		}
 		g.setFont(f);
-		g.fillRect(0,0, size.width, 50);
+		g.fillRect(0, 0, size.width, 50);
 		g.setColor(Color.BLACK);
-		g.drawString((ball ? "BALL IN" : "BALL OUT")+"| Tower Distance: "+(int)SmarterDashboard.table.getNumber("HOLE-DISTANCE",0), size.width/2-50, 25);//the meaning to everything
+		g.drawString((ball ? "BALL IN" : "BALL OUT") + "| Tower Distance: "
+				+ (int) SmarterDashboard.table.getNumber("HOLE-DISTANCE", 0), size.width / 2 - 50, 25);// the
+																										// meaning
+																										// to
+																										// everything
 		final boolean isIntaking = SmarterDashboard.table.getBoolean("intake", false);
-		
-		//if (isIntaking&&SmarterDashboard.table.getBoolean("INTAKE-REVERSE", false)) {
-		
-//	} else 
-		
-		if(isIntaking){
-			g.setColor(Color.green);
-		}else{
+
+		// if (isIntaking&&SmarterDashboard.table.getBoolean("INTAKE-REVERSE",
+		// false)) {
+
+		// } else
+
+		if (isIntaking) {
+			if (SmarterDashboard.table.getBoolean("INTAKE-REVERSE", false)) {
+				g.setColor(Color.yellow);
+			} else {
+				g.setColor(Color.green);
+			}
+		} else {
 			g.setColor(Color.red);
 		}
-		g.fillRect(0,50, size.width, 50);
+		g.fillRect(0, 50, size.width, 50);
 		g.setColor(Color.BLACK);
-		g.drawString((isIntaking ? "INTAKING" : "NOT INTAKING"), size.width/2-50, 75);//the meaning to everything
-		
+		g.drawString((isIntaking ? "INTAKING" : "NOT INTAKING"), size.width / 2 - 50, 75);// the
+																							// meaning
+																							// to
+																							// everything
+
 	}
 }
