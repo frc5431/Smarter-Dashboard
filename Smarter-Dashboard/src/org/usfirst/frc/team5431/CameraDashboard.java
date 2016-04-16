@@ -52,10 +52,11 @@ public class CameraDashboard {
 		
 	
 		final JComboBox<?> autochooser = new JComboBox<Object>(new String[]{
-				"CrossRockWallAndStop", "TouchOuterWork", "CrossLowbarAndStop", "CrossLowbarAndShoot", "DoNothing","CrossRockwallAndShoot","CrossMoatAndStop",
+				"CrossPortcullisAndShoot","Spybox","CrossRockWallAndStop", "TouchOuterWork", "CrossOuter", "CrossLowbarAndShoot", "DoNothing","CrossRockwallAndShoot","CrossMoatAndStop",
 		});
 		autochooser.setBounds(0,650,300,50);
-		//frame.add(autochooser);
+		autochooser.setSelectedItem("CrossLowbarAndShoot");
+		frame.add(autochooser);
 		
 		CameraHandler.initCamera(exe);
 			
@@ -85,6 +86,8 @@ public class CameraDashboard {
 		frame.add(new BallDisplay(frame.getSize()));
 		frame.add(new FrontCameraViewer(frame.getSize(),frame));
 
+		frame.setSize(frame.getWidth()+1, frame.getHeight()+1);
+		
 		//new FrontCameraViewer(exe,frame);
 		//new KinectCameraViewer(frame,exe);
 		// exe.execute(()->{

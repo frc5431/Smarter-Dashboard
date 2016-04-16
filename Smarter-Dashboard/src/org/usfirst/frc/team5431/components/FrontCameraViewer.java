@@ -61,7 +61,7 @@ public class FrontCameraViewer extends JPanel {
 //				}
 				final BufferedImage img = CameraHandler.getImage();
 				if (img == null) {
-					throw new IOException("Image is null!");
+					throw new IOException("Image is null! Check if GRIP is publishing video.");
 				}
 				g.drawImage(img, 0, 0, bounds.width, bounds.height, null);
 //				final Dimension viewsize = cam.getViewSize();

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431;
+package org.usfirst.frc.team5431.components;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import org.usfirst.frc.team5431.SmarterDashboard;
 
 public class AutonChooser {
 	// 0 - What to cross first
@@ -31,7 +33,7 @@ public class AutonChooser {
 
 	public static void create() {
 		final JFrame f = new JFrame("Create your own auton");
-		f.setSize(100, 500);
+		f.setSize(200, 500);
 		f.setLayout(null);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setResizable(false);
@@ -111,7 +113,7 @@ public class AutonChooser {
 		});
 		f.add(autoshoot);
 
-		f.setSize(100, 501);
+		f.setSize(400, 501);
 		f.repaint();
 
 	}

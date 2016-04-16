@@ -26,6 +26,7 @@ import org.usfirst.frc.team5431.components.USBCameraViewer;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 
+import org.usfirst.frc.team5431.components.AutonChooser;
 import org.usfirst.frc.team5431.components.RobotDisplay;
 
 //import com.ni.vision.NIVision.GetClassifierSampleInfoResult;
@@ -49,7 +50,7 @@ public class SmarterDashboard {
 //			e.printStackTrace();
 //		}
 		
-		AutonChooser.create();
+		//AutonChooser.create();
 
 		
 		NetworkTable.setClientMode();
