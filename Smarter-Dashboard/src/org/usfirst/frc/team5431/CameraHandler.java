@@ -3,9 +3,11 @@ package org.usfirst.frc.team5431;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -21,9 +23,18 @@ import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
 import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
 import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
 
+import jcifs.smb.NtlmPasswordAuthentication;
+import jcifs.smb.SmbFile;
+import jcifs.smb.SmbFileInputStream;
+
 public class CameraHandler {
 
 	private static volatile BufferedImage img;
+	
+	private enum CAMERA_TYPE{
+		IP,KINECT;
+	}
+	public static CAMERA_TYPE type = CAMERA_TYPE.IP;
 	
 	public static void refreshImage(){
 		//while(cam==null)initCamera();
@@ -115,11 +126,27 @@ public class CameraHandler {
 	}
 
 	public static void initCamera(Executor exe) {
+		if(type==CAMERA_TYPE.IP){
 		try {
-			exe.execute(thread);;;
+			exe.execute(thread);;;;;;;//ba'al, lord of semicolons. incur its wrath, and it will execute you.
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-
+		}else{
+			exe.execute(()->{
+				try{
+				while(!Thread.currentThread().isInterrupted()){
+					Thread.sleep(10);
+//					final NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Team 5431", " ");
+//					img = ImageIO.read(new BufferedInputStream(new SmbFileInputStream(new SmbFile("smb:\\\\Academytitans\\IMAGEUPDATE\\IR.png"))));
+					final String path = "C:\\Users\\AcademyHS Robotics\\AppData\\Roaming\\Microsoft\\Windows\\Network Shortcuts\\IMAGEUPDATE (Academytitans (titans))\\COLOR.png";
+					img = ImageIO.read(new File(path));
+				}
+				}catch(Throwable t){
+					t.printStackTrace();
+					
+				}
+			});
+		}
 	}
 }

@@ -42,7 +42,7 @@ public class BallDisplay extends JPanel {
 																										// meaning
 																										// to
 																										// everything
-		final boolean isIntaking = SmarterDashboard.table.getBoolean("intake", false);
+		final boolean isIntaking = SmarterDashboard.table.getBoolean("intake", false),reverse = SmarterDashboard.table.getBoolean("INTAKE-REVERSE", false);
 
 		// if (isIntaking&&SmarterDashboard.table.getBoolean("INTAKE-REVERSE",
 		// false)) {
@@ -50,7 +50,7 @@ public class BallDisplay extends JPanel {
 		// } else
 
 		if (isIntaking) {
-			if (SmarterDashboard.table.getBoolean("INTAKE-REVERSE", false)) {
+			if (reverse) {
 				g.setColor(Color.yellow);
 			} else {
 				g.setColor(Color.green);
@@ -60,10 +60,6 @@ public class BallDisplay extends JPanel {
 		}
 		g.fillRect(0, 50, size.width, 50);
 		g.setColor(Color.BLACK);
-		g.drawString((isIntaking ? "INTAKING" : "NOT INTAKING"), size.width / 2 - 50, 75);// the
-																							// meaning
-																							// to
-																							// everything
-
+		g.drawString((isIntaking ? reverse ? "REVERSE INTAKING" : "INTAKING" : "NOT INTAKING"), size.width / 2 - 50, 75);//this line makes no sense to someone who doesn't program. like are you okay man??::
 	}
 }
