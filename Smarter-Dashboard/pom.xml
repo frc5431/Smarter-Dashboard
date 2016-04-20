@@ -3,12 +3,23 @@
   <groupId>Smarter-Dashboard</groupId>
   <artifactId>Smarter-Dashboard</artifactId>
   <version>1.0.0</version>
+<packaging>jar</packaging>
   
+
+  <properties>
+    <start-class>org.usfirst.frc.team5431.SmarterDashboard</start-class>    
+</properties>
+
   <repositories>
+<repository>
+    <id>repo</id>
+    <url>file://${project.basedir}/repo/repo</url>
+</repository>
   <repository>
     <id>SarXos Repository</id>
     <url>http://www.sarxos.pl/repo/maven2</url>
 </repository>
+
   </repositories>
   
   
@@ -28,6 +39,79 @@
     <artifactId>webcam-capture-driver-ipcam</artifactId>
     <version>0.3.10</version>
 </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+<dependency>
+<groupId>edu.wpi.first.wpilib.networktables.java</groupId>
+<artifactId>NetworkTables</artifactId>
+<version>1.0.0</version>
+</dependency>
   </dependencies>
+<build>
+<pluginManagement>
+        <plugins>
+<plugin>
+      <!-- Build an executable JAR -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>2.4</version>
+      <configuration>
+<excludes>
+					<exclude>**/log4j.properties</exclude>
+				  </excludes>
+        <archive>
+          <manifest>
+            <addClasspath>true</addClasspath>
+            <classpathPrefix>lib/</classpathPrefix>
+            <mainClass>org.usfirst.frc.team5431.SmarterDashboard</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+<plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+        </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+	<configuration>
+          <source>1.4</source>
+          <target>1.4</target>
+
+        </configuration>
+       
+     </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+    <plugins>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 
 </project>
