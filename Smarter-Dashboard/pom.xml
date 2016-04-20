@@ -51,7 +51,7 @@
     </dependency>
 
 <dependency>
-<groupId>edu.wpi.first.wpilib.networktables.java</groupId>
+<groupId>edu.wpi.first.wpilibj.networktables</groupId>
 <artifactId>NetworkTables</artifactId>
 <version>1.0.0</version>
 </dependency>
@@ -71,7 +71,7 @@
         <archive>
           <manifest>
             <addClasspath>true</addClasspath>
-            <classpathPrefix>lib/</classpathPrefix>
+            <classpathPrefix>/repo/repo</classpathPrefix>
             <mainClass>main.java.org.usfirst.frc.team5431.SmarterDashboard</mainClass>
           </manifest>
         </archive>
@@ -84,6 +84,16 @@
                     <descriptorRef>jar-with-dependencies</descriptorRef>
                 </descriptorRefs>
             </configuration>
+ <executions>
+          <execution>
+            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+            <phase>install</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+
         </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
