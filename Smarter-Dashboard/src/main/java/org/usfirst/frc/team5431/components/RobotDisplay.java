@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431.components;
+package main.java.org.usfirst.frc.team5431.components;
 
 import java.awt.Rectangle;
 import java.io.File;
@@ -9,8 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.usfirst.frc.team5431.ResourceHandler;
-import org.usfirst.frc.team5431.SmarterDashboard;
+import main.java.org.usfirst.frc.team5431.ResourceHandler;
+import main.java.org.usfirst.frc.team5431.SmarterDashboard;
 
 public class RobotDisplay extends JPanel {
 	// AUTO-AIM-ON - whether it is auto aiming PUT

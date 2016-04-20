@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431.components;
+package main.java.org.usfirst.frc.team5431.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,8 +8,8 @@ import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
-import org.usfirst.frc.team5431.ResourceHandler;
-import org.usfirst.frc.team5431.SmarterDashboard;
+import main.java.org.usfirst.frc.team5431.ResourceHandler;
+import main.java.org.usfirst.frc.team5431.SmarterDashboard;
 
 public class BallDisplay extends JPanel {
 

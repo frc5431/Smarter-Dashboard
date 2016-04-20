@@ -1,30 +1,15 @@
-package org.usfirst.frc.team5431;
+package main.java.org.usfirst.frc.team5431;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Point;
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import org.usfirst.frc.team5431.components.BallDisplay;
-import org.usfirst.frc.team5431.components.FrontCameraViewer;
-import org.usfirst.frc.team5431.components.MotorRPM;
-import org.usfirst.frc.team5431.components.RobotDisplay;
-import org.usfirst.frc.team5431.components.TurretDisplay;
-
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import main.java.org.usfirst.frc.team5431.components.BallDisplay;
+import main.java.org.usfirst.frc.team5431.components.FrontCameraViewer;
+import main.java.org.usfirst.frc.team5431.components.MotorRPM;
 
 public class CameraDashboard {
 	public static boolean recievedMessage = false;

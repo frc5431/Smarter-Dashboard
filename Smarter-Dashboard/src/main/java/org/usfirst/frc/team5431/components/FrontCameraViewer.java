@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431.components;
+package main.java.org.usfirst.frc.team5431.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.usfirst.frc.team5431.CameraHandler;
+import main.java.org.usfirst.frc.team5431.CameraHandler;
 
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamException;

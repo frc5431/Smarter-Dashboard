@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431;
+package main.java.org.usfirst.frc.team5431;
 
 import javax.swing.ImageIcon;
 

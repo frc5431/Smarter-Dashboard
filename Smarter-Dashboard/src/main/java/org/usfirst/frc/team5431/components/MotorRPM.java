@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431.components;
+package main.java.org.usfirst.frc.team5431.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,7 +16,7 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeListener;
 
-import org.usfirst.frc.team5431.SmarterDashboard;
+import main.java.org.usfirst.frc.team5431.SmarterDashboard;
 
 public class MotorRPM {
 	

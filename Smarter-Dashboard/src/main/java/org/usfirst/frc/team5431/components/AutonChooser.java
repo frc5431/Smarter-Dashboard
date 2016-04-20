@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431.components;
+package main.java.org.usfirst.frc.team5431.components;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +12,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.usfirst.frc.team5431.SmarterDashboard;
+import main.java.org.usfirst.frc.team5431.SmarterDashboard;
 
 public class AutonChooser {
 	// 0 - What to cross first

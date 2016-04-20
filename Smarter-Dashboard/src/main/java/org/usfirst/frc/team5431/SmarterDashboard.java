@@ -1,33 +1,9 @@
-package org.usfirst.frc.team5431;
+package main.java.org.usfirst.frc.team5431;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
-import javax.imageio.ImageIO;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.usfirst.frc.team5431.components.USBCameraViewer;
-
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-
-import org.usfirst.frc.team5431.components.AutonChooser;
-import org.usfirst.frc.team5431.components.RobotDisplay;
 
 //import com.ni.vision.NIVision.GetClassifierSampleInfoResult;
 

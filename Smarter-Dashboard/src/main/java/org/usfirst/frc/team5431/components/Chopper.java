@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431.components;
+package main.java.org.usfirst.frc.team5431.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +7,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import org.usfirst.frc.team5431.SmarterDashboard;
+import main.java.org.usfirst.frc.team5431.SmarterDashboard;
 
 public class Chopper extends JPanel{
 

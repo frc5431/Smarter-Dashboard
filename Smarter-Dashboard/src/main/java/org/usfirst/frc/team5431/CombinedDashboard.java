@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431;
+package main.java.org.usfirst.frc.team5431;
 
 import java.awt.Color;
 import java.io.File;
@@ -11,8 +11,8 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.usfirst.frc.team5431.components.RobotDisplay;
-import org.usfirst.frc.team5431.components.TurretDisplay;
+import main.java.org.usfirst.frc.team5431.components.RobotDisplay;
+import main.java.org.usfirst.frc.team5431.components.TurretDisplay;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 

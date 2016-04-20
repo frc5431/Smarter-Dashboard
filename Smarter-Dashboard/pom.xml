@@ -7,7 +7,7 @@
   
 
   <properties>
-    <start-class>org.usfirst.frc.team5431.SmarterDashboard</start-class>    
+    <start-class>main.java.org.usfirst.frc.team5431.SmarterDashboard</start-class>    
 </properties>
 
   <repositories>
@@ -72,7 +72,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>org.usfirst.frc.team5431.SmarterDashboard</mainClass>
+            <mainClass>main.java.org.usfirst.frc.team5431.SmarterDashboard</mainClass>
           </manifest>
         </archive>
       </configuration>

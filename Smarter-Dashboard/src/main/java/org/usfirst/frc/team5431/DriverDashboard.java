@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5431;
+package main.java.org.usfirst.frc.team5431;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -9,10 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import org.usfirst.frc.team5431.components.BallDisplay;
-import org.usfirst.frc.team5431.components.Chopper;
-import org.usfirst.frc.team5431.components.FrontCameraViewer;
-import org.usfirst.frc.team5431.components.USBCameraViewer;
+import main.java.org.usfirst.frc.team5431.components.BallDisplay;
+import main.java.org.usfirst.frc.team5431.components.Chopper;
+import main.java.org.usfirst.frc.team5431.components.FrontCameraViewer;
+import main.java.org.usfirst.frc.team5431.components.USBCameraViewer;
 
 public class DriverDashboard {
 	private static final Executor exe = Executors.newCachedThreadPool();
