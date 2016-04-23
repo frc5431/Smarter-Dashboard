@@ -84,7 +84,7 @@ public class SmarterDashboard {
 					sleep(66);
 					frame.repaint();
 					SmarterDashboard.table.putString("AUTO-SELECTED", (String) autochooser.getSelectedItem());
-					SmarterDashboard.table.putNumber("STATION", (double) stationchooser.getValue());
+					SmarterDashboard.table.putNumber("STATION", (int) stationchooser.getValue());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
