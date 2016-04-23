@@ -2,6 +2,7 @@ package main.java.org.usfirst.frc.team5431;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -29,7 +30,9 @@ import jcifs.smb.SmbFileInputStream;
 
 public class CameraHandler {
 
-	private static volatile BufferedImage img;
+	private static volatile BufferedImage img,ir;
+	
+	private static final String url ="10.54.31.20";
 	
 	private enum CAMERA_TYPE{
 		IP,KINECT;
@@ -125,6 +128,16 @@ public class CameraHandler {
 		return img;
 	}
 
+	public static BufferedImage getIR(){
+		return ir;
+	}
+	
+	private static void invertImage(final BufferedImage i){
+		final Graphics2D g = i.createGraphics();
+		g.drawImage(i, 0, -i.getHeight(), i.getWidth(), -i.getHeight(), null);
+		g.dispose();
+	}
+	
 	public static void initCamera(Executor exe) {
 		if(type==CAMERA_TYPE.IP){
 		try {
@@ -139,8 +152,16 @@ public class CameraHandler {
 					Thread.sleep(10);
 //					final NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Team 5431", " ");
 //					img = ImageIO.read(new BufferedInputStream(new SmbFileInputStream(new SmbFile("smb:\\\\Academytitans\\IMAGEUPDATE\\IR.png"))));
-					final String path = "C:\\Users\\AcademyHS Robotics\\AppData\\Roaming\\Microsoft\\Windows\\Network Shortcuts\\IMAGEUPDATE (Academytitans (titans))\\COLOR.png";
-					img = ImageIO.read(new File(path));
+					final BufferedImage tempimg = ImageIO.read(new URL(url+":8000/Color.png")),tempir=ImageIO.read(new URL(url+":8001/IR.png"));
+					if(tempimg!=null){
+						img = tempimg;
+						invertImage(img);
+					}
+
+					if(tempir!=null){
+						ir=tempir;
+						invertImage(ir);
+					}
 				}
 				}catch(Throwable t){
 					t.printStackTrace();

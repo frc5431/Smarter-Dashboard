@@ -68,6 +68,10 @@ public class FrontCameraViewer extends JPanel {
 //				final Dimension viewsize = cam.getViewSize();
 //				g.drawString(cam.getName() + " recording at " + cam.getFPS() + " FPS (" + outfps + " UPS) at "
 //						+ viewsize.width + "x" + viewsize.height, 0, 16);
+				final BufferedImage ir = CameraHandler.getIR();
+				if(ir!=null){
+					g.drawImage(img, 0, bounds.height-200, 250, 200, null);
+				}
 				g.dispose();
 			} catch (Exception e) {
 				g.setColor(Color.RED);
