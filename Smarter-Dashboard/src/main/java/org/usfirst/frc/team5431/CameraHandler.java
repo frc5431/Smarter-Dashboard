@@ -34,7 +34,7 @@ public class CameraHandler {
 	
 	private static final String url ="10.54.31.20";
 	
-	private enum CAMERA_TYPE{
+	public enum CAMERA_TYPE{
 		IP,KINECT;
 	}
 	public static CAMERA_TYPE type = CAMERA_TYPE.IP;

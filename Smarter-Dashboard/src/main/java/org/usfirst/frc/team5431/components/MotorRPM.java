@@ -20,7 +20,7 @@ import main.java.org.usfirst.frc.team5431.SmarterDashboard;
 
 public class MotorRPM {
 	
-	private final static Font font = new Font(Font.DIALOG,Font.PLAIN,32);
+	public final static Font font = new Font(Font.DIALOG,Font.PLAIN,32);
 
 	private final boolean seperate;
 
