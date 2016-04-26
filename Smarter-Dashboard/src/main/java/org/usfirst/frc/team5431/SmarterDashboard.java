@@ -55,18 +55,22 @@ public class SmarterDashboard {
 
 		new MotorRPM(new Point(0, 500), true, frame, exe);
 
-		final JComboBox<?> autochooser = new JComboBox<Object>(new String[] { "CrossPortcullisAndShoot", "Spybox",
-				"CrossRockWallAndStop", "TouchOuterWork", "CrossOuter", "CrossLowbarAndShoot", "DoNothing",
-				"CrossRockwallAndShoot", "CrossMoatAndStop", });
+		final JComboBox<?> autochooser = new JComboBox<Object>(new String[] { "Lowbar","Rockwall","RoughTerrain","Cheval","Porticullis","Reach","None" });
 		autochooser.setBounds(0, 650, 500, 50);
-		autochooser.setSelectedItem("CrossLowbarAndShoot");
+		autochooser.setSelectedItem("Lowbar");
 		autochooser.setFont(MotorRPM.font);
 		frame.add(autochooser);
 
 		final JSpinner stationchooser = new JSpinner(new SpinnerNumberModel(1, 1, 5, 1));
-		stationchooser.setBounds(0, 700, 500, 50);
+		stationchooser.setBounds(0, 700, 250, 50);
 		stationchooser.setFont(MotorRPM.font);
 		frame.add(stationchooser);
+		
+		final JComboBox<?> aimchooser = new JComboBox<Boolean>(new Boolean[]{true,false});
+		aimchooser.setBounds(250, 700, 250, 50);
+		aimchooser.setSelectedItem(true);
+		aimchooser.setFont(MotorRPM.font);
+		frame.add(aimchooser);
 
 		CameraHandler.initCamera(exe);
 
@@ -83,8 +87,10 @@ public class SmarterDashboard {
 				try {
 					sleep(66);
 					frame.repaint();
+					SmarterDashboard.table.putBoolean("AIM-ON", (boolean) aimchooser.getSelectedItem());
 					SmarterDashboard.table.putString("AUTO-SELECTED", (String) autochooser.getSelectedItem());
 					SmarterDashboard.table.putNumber("STATION", (int) stationchooser.getValue());
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -21,7 +21,7 @@ public class AutonChooser {
 	// 3 auto shoot (true or false)
 
 	private enum FIRST_AUTO_STEP {
-		StandStill, TouchOuterWork, Lowbar, RockWall, RoughTerrain, Portcullis, ChevalDeFrise, Moat;
+		RoughTerrain,Rockwall,Lowbar;
 	}
 
 	private static final double[] output = new double[4];
