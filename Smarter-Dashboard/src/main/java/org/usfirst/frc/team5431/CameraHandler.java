@@ -30,14 +30,14 @@ import jcifs.smb.SmbFileInputStream;
 
 public class CameraHandler {
 
-	private static volatile BufferedImage img,ir;
+	private static volatile BufferedImage img,ir,rear;
 	
-	private static final String url ="10.54.31.20";
+	private static final String url ="http://10.54.31.20";
 	
 	public enum CAMERA_TYPE{
-		IP,KINECT;
+		IP,KINECT,DUAL;
 	}
-	public static CAMERA_TYPE type = CAMERA_TYPE.IP;
+	public static CAMERA_TYPE type = CAMERA_TYPE.DUAL;
 	
 	public static void refreshImage(){
 		//while(cam==null)initCamera();
@@ -132,6 +132,14 @@ public class CameraHandler {
 		return ir;
 	}
 	
+	/**
+	 * re rawr
+	 * @return re-rawr
+	 */
+	public static BufferedImage getRear(){
+		return rear;
+	}
+	
 	private static void invertImage(final BufferedImage i){
 		final Graphics2D g = i.createGraphics();
 		g.drawImage(i, 0, -i.getHeight(), i.getWidth(), -i.getHeight(), null);
@@ -139,35 +147,94 @@ public class CameraHandler {
 	}
 	
 	public static void initCamera(Executor exe) {
-		if(type==CAMERA_TYPE.IP){
+		switch(type){
+		case IP:
 		try {
 			exe.execute(thread);;;;;;;//ba'al, lord of semicolons. incur its wrath, and it will execute you.
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-		}else{
+		break;
+		case DUAL:
 			exe.execute(()->{
 				try{
+					while(!Thread.currentThread().isInterrupted()){
+						Thread.sleep(200);
+//						final NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Team 5431", " ");
+//						img = ImageIO.read(new BufferedInputStream(new SmbFileInputStream(new SmbFile("smb:\\\\Academytitans\\IMAGEUPDATE\\IR.png"))));
+						final BufferedImage temprear = ImageIO.read(new URL(url+":8001/cam_1.jpeg"));
+						if(temprear!=null){
+							rear = temprear.getSubimage(0, 0, temprear.getWidth(), (int) (temprear.getHeight()*0.91));//get rid of the watermark. no one likes it
+							invertImage(rear);
+						}
+					}
+					}catch(Throwable t){
+						System.err.println("Ignoring rear "+t);
+					}
+			});
+		case KINECT:
+			exe.execute(()->{
+				try{
+					while(!Thread.currentThread().isInterrupted()){
+						try{
+						Thread.sleep(1000);
+//						final NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Team 5431", " ");
+//						img = ImageIO.read(new BufferedInputStream(new SmbFileInputStream(new SmbFile("smb:\\\\Academytitans\\IMAGEUPDATE\\IR.png"))));
+						final BufferedImage tempir=ImageIO.read(new URL(url+":8000/IR.jpeg"));
+
+						if(tempir!=null){
+							ir=tempir;
+							invertImage(ir);
+						}
+						}catch(IOException e){
+							System.err.println("Ignoring IR Image "+e);
+						}
+					}
+					}catch(Throwable t){
+						t.printStackTrace();
+						
+					}
+			});
+			exe.execute(()->{
+				try{
+				long startTime = System.currentTimeMillis();
+				int delta = 0;
+				int fps = 0;
+				boolean lastNull=false;
 				while(!Thread.currentThread().isInterrupted()){
-					Thread.sleep(10);
+					try{
+					delta++;
+					if(System.currentTimeMillis()>=startTime+1000){
+						fps=delta;
+						delta=0;
+						startTime=System.currentTimeMillis();
+						System.out.println("FPS: "+fps);
+					}
 //					final NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Team 5431", " ");
 //					img = ImageIO.read(new BufferedInputStream(new SmbFileInputStream(new SmbFile("smb:\\\\Academytitans\\IMAGEUPDATE\\IR.png"))));
-					final BufferedImage tempimg = ImageIO.read(new URL(url+":8000/Color.png")),tempir=ImageIO.read(new URL(url+":8001/IR.png"));
+					final BufferedImage tempimg = ImageIO.read(new URL(url+":8000/Color.jpeg"));
 					if(tempimg!=null){
 						img = tempimg;
 						invertImage(img);
+						lastNull=false;
+					}else{
+						if(!lastNull){
+							lastNull=true;
+							continue;
+						}
 					}
-
-					if(tempir!=null){
-						ir=tempir;
-						invertImage(ir);
+					}catch(IOException e){
+						System.err.println("Ignoring image "+e);
 					}
+					Thread.sleep(150);
 				}
 				}catch(Throwable t){
 					t.printStackTrace();
 					
 				}
 			});
-		}
+
+			
 	}
+}
 }

@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import main.java.org.usfirst.frc.team5431.components.BallDisplay;
 import main.java.org.usfirst.frc.team5431.components.FrontCameraViewer;
 import main.java.org.usfirst.frc.team5431.components.MotorRPM;
+import main.java.org.usfirst.frc.team5431.components.RearView;
 
 public class SmarterDashboard {
 	public static NetworkTable table;
@@ -31,6 +32,7 @@ public class SmarterDashboard {
 				final CameraHandler.CAMERA_TYPE type = CameraHandler.CAMERA_TYPE.valueOf(args[0]);
 				if (type == null) {
 					System.err.println("WRONG TYPE " + args[0]);
+					System.exit(-1);
 				} else {
 					CameraHandler.type = type;
 				}
@@ -61,14 +63,14 @@ public class SmarterDashboard {
 		autochooser.setFont(MotorRPM.font);
 		frame.add(autochooser);
 
-		final JSpinner stationchooser = new JSpinner(new SpinnerNumberModel(1, 1, 5, 1));
+		final JComboBox<?> stationchooser = new JComboBox<Integer>(new Integer[]{1,2,3,4,5});
 		stationchooser.setBounds(0, 700, 250, 50);
 		stationchooser.setFont(MotorRPM.font);
 		frame.add(stationchooser);
 		
-		final JComboBox<?> aimchooser = new JComboBox<Boolean>(new Boolean[]{true,false});
+		final JComboBox<?> aimchooser = new JComboBox<String>(new String[]{"Vision ON","Vision off"});
 		aimchooser.setBounds(250, 700, 250, 50);
-		aimchooser.setSelectedItem(true);
+		aimchooser.setSelectedItem("Vision ON");
 		aimchooser.setFont(MotorRPM.font);
 		frame.add(aimchooser);
 
@@ -87,9 +89,9 @@ public class SmarterDashboard {
 				try {
 					sleep(66);
 					frame.repaint();
-					SmarterDashboard.table.putBoolean("AIM-ON", (boolean) aimchooser.getSelectedItem());
+					SmarterDashboard.table.putBoolean("AIM-ON",  aimchooser.getSelectedItem().equals("Vision ON") ? true : false);
 					SmarterDashboard.table.putString("AUTO-SELECTED", (String) autochooser.getSelectedItem());
-					SmarterDashboard.table.putNumber("STATION", (int) stationchooser.getValue());
+					SmarterDashboard.table.putNumber("STATION", (int) stationchooser.getSelectedItem());
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -104,6 +106,18 @@ public class SmarterDashboard {
 		frame.add(new FrontCameraViewer(frame.getSize(), frame));
 
 		frame.setSize(frame.getWidth() + 1, frame.getHeight() + 1);
+		
+		if(CameraHandler.type==CameraHandler.CAMERA_TYPE.DUAL){
+		final JFrame rearframe = new JFrame("Rear View");
+		rearframe.setSize(1000, 1000);// 1080
+		rearframe.setIconImage(ResourceHandler.getResource("logo").getImage());
+		rearframe.setResizable(true);
+		rearframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		rearframe.setLayout(null);
+		rearframe.setVisible(true);
+		
+		rearframe.add(new RearView(rearframe.getSize(), rearframe));
+		}
 
 		// new FrontCameraViewer(exe,frame);
 		// new KinectCameraViewer(frame,exe);
