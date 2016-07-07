@@ -37,7 +37,7 @@ public class CameraHandler {
 	public enum CAMERA_TYPE{
 		IP,KINECT,DUAL;
 	}
-	public static CAMERA_TYPE type = CAMERA_TYPE.DUAL;
+	public static CAMERA_TYPE type = CAMERA_TYPE.IP;
 	
 	public static void refreshImage(){
 		//while(cam==null)initCamera();
